@@ -1,65 +1,70 @@
+var
+  zones = {},
+  map,
+  bounds = [
+    [48.84565494147338, 2.3881959915161137],
+    [48.85109831928798, 2.400963306427002]
+  ];
+  mapLink =
+    //'<a href="http://carto.com/basemaps">Map tiles by Carto, under CC BY 3.0. Data by OpenStreetMap, under ODbL</a>';
+    '<a href="http://maps.stamen.com/#watercolor/">Map tiles by Stamen</a>. <a href="http://openstreetmap.org">Data by OpenStreetMap, under ODbL</a>';
+
 $(function() {
-  var map = L.map('map', {
+  map = L.map('map', {
     center: [48.84838, 2.39592],
     zoom: 18,
-    zoomControl: false
-  }),
-
-  mapLink =
-    '<a href="http://carto.com/basemaps">Map tiles by Carto, under CC BY 3.0. Data by OpenStreetMap, under ODbL</a>';
-
-  map.dragging.disable();
-  map.touchZoom.disable();
-  map.doubleClickZoom.disable();
-  map.scrollWheelZoom.disable();
-  map.boxZoom.disable();
-  map.keyboard.disable();
-  if (map.tap) map.tap.disable();
-  document.getElementById('map').style.cursor='default';
+    minZoom: 17,
+    maxZoom: 19,
+    zIndex: 1,
+    updateWhenIdle: true,
+    maxBounds: bounds
+  });
 
   L.tileLayer(
-    'http://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+    //'http://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
+    'http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.png',
+    {
       attribution: '&copy; ' + mapLink + ' Contributors',
-      maxZoom: 18,
-    }).addTo(map);
+    }).setOpacity(0.6).addTo(map);
 
   // import zones
-  $.getJSON('zones.json?' + Date.now(), function (zones) {
-    L.geoJSON(zones, {
-      style: function(feature) {
-        switch (feature.properties.owner) {
-          case 'A':
-            return {
-              weight: 2,
-              opacity: 1,
-              color: '#ff0000',
-              dashArray: '3',
-              fillOpacity: 0.6,
-              fillColor: '#ff0000'
-            };
-            break;
-          case 'B':
-            return {
-              weight: 2,
-              opacity: 1,
-              color: '#0000ff',
-              dashArray: '3',
-              fillOpacity: 0.6,
-              fillColor: '#0000ff'
-            };
-            break;
-          default:
-            return {
-              weight: 2,
-              opacity: 1,
-              color: '#cccccc',
-              dashArray: '3',
-              fillOpacity: 0.1,
-              fillColor: '#cccccc'
-            };
-            break;
-        }
+  $.getJSON('zones.json?' + Date.now(), function (zonesGJ) {
+    zonesGJ.features.forEach(function(feature) {
+      var color, opacity, fillColor, fillOpacity = 0.8, coords = [[]];
+      switch (feature.properties.owner) {
+        case 'A':
+          color = '#ff0000';
+          fillColor ='#ff0000';
+          opacity = 0.6;
+          fillOpacity = 0.8;
+          break;
+        case 'B':
+          color = '#0000ff';
+          fillColor ='#0000ff';
+          opacity = 0.6;
+          fillOpacity = 0.8;
+          break;
+        default:
+          color ='#000000';
+          fillColor ='#cccccc';
+          opacity = 0.8;
+          fillOpacity = 0.8;
+          break;
       }
-    }).addTo(map);
+      feature.geometry.coordinates[0].forEach(function(ll) {
+        var point = [];
+        point.push(ll[1]);
+        point.push(ll[0]);
+        coords[0].push(point);
+      });
+      zones[feature.properties.name] = L.polygon(coords, {
+        dashArray: '4,2',
+        weight: 1,
+        color: color,
+        fillColor: fillColor,
+        opacity: opacity,
+        fillOpacity: fillOpacity
+      }).bindLabel(feature.properties.name, { noHide: true }).addTo(map);
+    });
   });
 });
