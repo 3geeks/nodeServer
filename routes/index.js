@@ -50,7 +50,7 @@ router.get('/', (req, res, next) => {
     console.log('Game not ready yet!');
     res.redirect('/reset');
   }
-  res.render('index', {title: 'NationWar'});
+  res.render('index', {title: 'WarNation'});
 });
 
 router.get('/zones.json', (req, res, next) => {
