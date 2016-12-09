@@ -2,5 +2,8 @@
 
 sudo yum install nodejs
 sudo npm install -g pm2
+sudo npm bower -g pm2
 npm install
-pm2 start ./bin/www --name RepWar --watch
+bower install
+pm2 kill
+pm2 start ./bin/www --name NationWar --watch --ignore-watch ./public/stylesheets/*.css

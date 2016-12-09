@@ -4,6 +4,7 @@ var
   Promise = require('bluebird'),            // better promises than native ones
   Waterline = require('waterline'),         // the ORM
   memoryAdapter = require('sails-memory'),  // the adapter for the database
+  fs = require('fs'),                       // use the filesystem
 
   waterlineConfig = {                       // the waterline configuration
     adapters: {
@@ -49,7 +50,11 @@ router.get('/', (req, res, next) => {
     console.log('Game not ready yet!');
     res.redirect('/reset');
   }
-  res.render('index', {title: 'RepWar'});
+  res.render('index', {title: 'NationWar'});
+});
+
+router.get('/zones.json', (req, res, next) => {
+  res.type('application/json').json(require('../public/data/zones.json'));
 });
 
 /*

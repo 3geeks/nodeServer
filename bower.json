@@ -1,0 +1,16 @@
+{
+  "name": "nodeserver",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "leaflet": "^1.0.2",
+    "jquery": "^3.1.1"
+  }
+}

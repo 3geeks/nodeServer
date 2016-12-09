@@ -19,9 +19,9 @@ module.exports = Waterline.Collection.extend({
       collection: 'player',
       via: 'id'
     },
-    pplayerapeons: 'integer',
-    pplayerbpeons: 'integer',
-    zone: 'string'
+    playerapeons: 'integer',
+    playerbpeons: 'integer',
+    zone: 'json'
   }
 });
 
