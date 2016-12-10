@@ -42,6 +42,11 @@ waterline.initialize(waterlineConfig, (err, ontology) => {
   Routes definitions
  **********************************************************************************************************************/
 
+// Meraki endpoint
+router.all('/ciscohackathon/meraki', (req, res, next) => {
+  console.log('Meraki recieved', req.params);
+});
+
 /*
   Display the game board
  */
