@@ -16,7 +16,6 @@ function Sensor (name, id, type, coef, coordinates) {
 
 Sensor.prototype.harvest = function () {
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
-console.log('--------------------------------- Harvesting sensor', this.name);
   return rp({
     uri: this.url,
     headers: {
@@ -25,9 +24,7 @@ console.log('--------------------------------- Harvesting sensor', this.name);
     json: true
   })
     .then(data => {
-      console.log(data);
       var val = data[0].dps[Object.keys(data[0].dps)[0]];
-      console.log('.............. collected value', val);
       return val * this.coef;
     });
 };

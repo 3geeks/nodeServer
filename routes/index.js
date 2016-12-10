@@ -226,7 +226,7 @@ router.get('/status/peons/:player/zones/:zone', (req, res, next) => {
 router.get('/status/zones/:player', (req, res, next) => {
   res.json({
     success: true,
-    result: Object.keys(players[req.params.player].bases)
+    result: Object.keys(players[req.params.player].bases).sort()
   });
 });
 
@@ -240,7 +240,7 @@ router.get('/status/zones', (req, res, next) => {
 
   res.json({
     success: true,
-    result: z
+    result: z.sort()
   });
 });
 
