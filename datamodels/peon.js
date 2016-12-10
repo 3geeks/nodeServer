@@ -1,32 +1,21 @@
 var
-  Waterline = require('waterline'),
-  uuid = require('node-uuid');
+  pg = require('../utils/person-generator'),
+  person = pg.get(),
+  name = person.firstName + ' ' + person.middleName + ' ' + person.lastName;
 
-module.exports = Waterline.Collection.extend({
-  identity: 'peon',
-  connection: 'default',
-  attributes: {
-    id: {
-      type: 'text',
-      primaryKey: true,
-      unique: true,
-      defaultsTo: () => {
-        return uuid.v4();
-      }
-    },
-    name: 'string',
-    ownerid: {
-      collection: 'player',
-      via: 'id'
-    },
-    currentlat: 'float',
-    currentlon: 'float',
-    headingbase: {
-      collection: 'base',
-      via: 'id'
-    },
-    headinglat: 'float',
-    headinglon: 'float'
-  }
-});
+function Peon(name, player, toBase) {
+  this.owner = player;
+  this.name = name;
+  this.currentPos = player.bastion.coordinates;
+  this.headingBase = toBase;
+  this.headincCoordinates = toBase.center;
+  console.log('==== Peon', name, 'owned by', player.name, 'created.');
+}
+
+Peon.prototype.setHeadingBase = function (base) {
+  this.headingBase = base;
+  this.headingCoordinates = base.center;
+};
+
+module.exports = Peon;
 

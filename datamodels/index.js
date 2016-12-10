@@ -1,6 +1,6 @@
 module.exports = {
-  base: require('./base'),
-  peon: require('./peon'),
-  player: require('./player'),
-  spot: require('./spot')
+  Base: require('./base'),
+  Peon: require('./peon'),
+  Player: require('./player'),
+  Sensor: require('./sensor')
 };

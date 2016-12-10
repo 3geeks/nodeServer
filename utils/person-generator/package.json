@@ -1,0 +1,107 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "person-generator@^1.0.1",
+        "scope": null,
+        "escapedName": "person-generator",
+        "name": "person-generator",
+        "rawSpec": "^1.0.1",
+        "spec": ">=1.0.1 <2.0.0",
+        "type": "range"
+      },
+      "/Users/Jeff/dev/nodeServer"
+    ]
+  ],
+  "_from": "person-generator@>=1.0.1 <2.0.0",
+  "_id": "person-generator@1.0.1",
+  "_inCache": true,
+  "_location": "/person-generator",
+  "_nodeVersion": "5.10.1",
+  "_npmOperationalInternal": {
+    "host": "packages-16-east.internal.npmjs.com",
+    "tmp": "tmp/person-generator-1.0.1.tgz_1464013459598_0.7692506611347198"
+  },
+  "_npmUser": {
+    "name": "winfinit",
+    "email": "winfinit@gmail.com"
+  },
+  "_npmVersion": "3.8.3",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "person-generator@^1.0.1",
+    "scope": null,
+    "escapedName": "person-generator",
+    "name": "person-generator",
+    "rawSpec": "^1.0.1",
+    "spec": ">=1.0.1 <2.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/person-generator/-/person-generator-1.0.1.tgz",
+  "_shasum": "5ee3703f7fd0b832a276e7a5979c00b06349f757",
+  "_shrinkwrap": null,
+  "_spec": "person-generator@^1.0.1",
+  "_where": "/Users/Jeff/dev/nodeServer",
+  "author": {
+    "name": "Roman Jurkov",
+    "email": "winfinit@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/winfinit/personGenerator/issues"
+  },
+  "dependencies": {
+    "dlgen": "0.0.4",
+    "moment": "2.13.0",
+    "sprintf": "0.1.5",
+    "ssn": "0.5.3"
+  },
+  "description": "Generate a person for testing purposes with \"real\" fake data",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "5ee3703f7fd0b832a276e7a5979c00b06349f757",
+    "tarball": "https://registry.npmjs.org/person-generator/-/person-generator-1.0.1.tgz"
+  },
+  "gitHead": "de8bcf2db6fee5c7f803b7e4f8efa7612446f7ef",
+  "homepage": "https://github.com/winfinit/personGenerator#readme",
+  "keywords": [
+    "name",
+    "generate",
+    "test",
+    "fake",
+    "data",
+    "mock",
+    "person",
+    "people",
+    "lastname",
+    "firstname",
+    "faker",
+    "social security",
+    "ssn",
+    "dl",
+    "drivers license"
+  ],
+  "license": "ISC",
+  "main": "index.js",
+  "maintainers": [
+    {
+      "name": "winfinit",
+      "email": "winfinit@gmail.com"
+    }
+  ],
+  "name": "person-generator",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/winfinit/personGenerator.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.1"
+}

@@ -1,0 +1,1479 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Aire - Dorian Fable d'Eglantine",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Traffic in\"}, {\"id\": \"direction_2\", \"name\": \"Traffic out\"}]",
+        "classes": "all",
+        "location": [
+          48.847674,
+          2.395232
+        ],
+        "type": "area",
+        "id": 7039
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.395232,
+          48.847674
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Aire Ilot - Voltaire St Antoine",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Traffic in\"}, {\"id\": \"direction_2\", \"name\": \"Traffic out\"}, {\"id\": \"occupancy\", \"name\": \"Average occupancy\"}]",
+        "classes": "all",
+        "location": [
+          48.8488,
+          2.394701
+        ],
+        "type": "area",
+        "id": 7051
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.394701,
+          48.8488
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Arret de bus - Kiosque",
+        "measures": "bike",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Traffic in\"}, {\"id\": \"direction_2\", \"name\": \"Traffic out\"}]",
+        "classes": "all",
+        "location": [
+          48.848179,
+          2.394725
+        ],
+        "measure_2": "ped",
+        "type": "area",
+        "id": 6181
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.394725,
+          48.848179
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Arret de bus - Taillebourg Trone",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Traffic in\"}, {\"id\": \"direction_2\", \"name\": \"Traffic out\"}]",
+        "classes": "all",
+        "location": [
+          48.848702,
+          2.39682
+        ],
+        "type": "area",
+        "id": 6200
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.3968675732612614,
+          48.848595568606875
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Avenue de Taillebourg - arrivee sur cercle interieur",
+        "measures": "vehicle",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Vers le cercle interieur\"}, {\"id\": \"direction_2\", \"name\": \"Vers le cercle exterieur\"}]",
+        "classes": "all",
+        "location": [
+          48.84884,
+          2.396664
+        ],
+        "measure_2": "bike",
+        "type": "turnstile",
+        "id": 6197
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.3965939879417424,
+          48.84891150806731
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Avenue Dorian",
+        "measures": "vehicle",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Vers le Sud\"}, {\"id\": \"direction_2\", \"name\": \"Vers le Nord\"}]",
+        "classes": "all",
+        "location": [
+          48.847692,
+          2.394631
+        ],
+        "measure_2": "bike",
+        "type": "turnstile",
+        "id": 7073
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.394606471061707,
+          48.84770598533953
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Avenue du Trone",
+        "measures": "vehicle",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Vers l'Est\"}, {\"id\": \"direction_2\", \"name\": \"Vers l'Ouest\"}]",
+        "classes": "all",
+        "location": [
+          48.848224,
+          2.397625
+        ],
+        "measure_2": "bike",
+        "type": "turnstile",
+        "id": 7071
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.397625,
+          48.848224
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Avenue P-Auguste",
+        "measures": "vehicle",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Vers le Sud\"}, {\"id\": \"direction_2\", \"name\": \"Vers le Nord\"}]",
+        "classes": "all",
+        "location": [
+          48.849489,
+          2.395296
+        ],
+        "measure_2": "bike",
+        "type": "turnstile",
+        "id": 6188
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.395296,
+          48.849489
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Banc cote arret de bus - Kiosque",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Traffic in\"}, {\"id\": \"direction_2\", \"name\": \"Traffic out\"}]",
+        "classes": "all",
+        "location": [
+          48.848057,
+          2.394617
+        ],
+        "type": "area",
+        "id": 6180
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.394617,
+          48.848057
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Bouche metro - Dorian",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Entree\"}, {\"id\": \"direction_2\", \"name\": \"Sortie\"}]",
+        "classes": "all",
+        "location": [
+          48.847775,
+          2.395125
+        ],
+        "type": "turnstile",
+        "id": 7038
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.395125,
+          48.847775
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Bouche metro - Trone Bel Air",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Entree\"}, {\"id\": \"direction_2\", \"name\": \"Sortie\"}]",
+        "classes": "all",
+        "location": [
+          48.847816,
+          2.396968
+        ],
+        "type": "turnstile",
+        "id": 14172
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.396968,
+          48.847816
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Bouche metro 3 - Voltaire St Antoine",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Entree\"}, {\"id\": \"direction_2\", \"name\": \"Sortie\"}]",
+        "classes": "all",
+        "location": [
+          48.848716,
+          2.394831
+        ],
+        "type": "turnstile",
+        "id": 7054
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.394831,
+          48.848716
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Bouche metro RER - Trone Taillebourg",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Entree\"}, {\"id\": \"direction_2\", \"name\": \"Sortie\"}]",
+        "classes": "all",
+        "location": [
+          48.848731,
+          2.397086
+        ],
+        "type": "turnstile",
+        "id": 6192
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.3970606923103337,
+          48.84866263972045
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Bouche RER 1 - Voltaire St Antoine",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Entree\"}, {\"id\": \"direction_2\", \"name\": \"Sortie\"}]",
+        "classes": "all",
+        "location": [
+          48.848843,
+          2.394872
+        ],
+        "type": "turnstile",
+        "id": 7052
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.394872,
+          48.848843
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Bouche RER 2 - Voltaire St Antoine",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Entree\"}, {\"id\": \"direction_2\", \"name\": \"Sortie\"}]",
+        "classes": "all",
+        "location": [
+          48.848777,
+          2.394834
+        ],
+        "type": "turnstile",
+        "id": 7053
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.394834,
+          48.848777
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Boulevard Diderot",
+        "measures": "vehicle",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Vers l'Ouest\"}, {\"id\": \"direction_2\", \"name\": \"Vers l'Est\"}]",
+        "classes": "all",
+        "location": [
+          48.848209,
+          2.394303
+        ],
+        "measure_2": "bike",
+        "type": "turnstile",
+        "id": 7045
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.3942631483078007,
+          48.84822844091974
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Boulevard Voltaire",
+        "measures": "vehicle",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Vers l'Ouest\"}, {\"id\": \"direction_2\", \"name\": \"Vers l'Est\"}]",
+        "classes": "all",
+        "location": [
+          48.849134,
+          2.394665
+        ],
+        "measure_2": "bike",
+        "type": "turnstile",
+        "id": 7055
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.3946735262870793,
+          48.84914802010167
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Cercle exterieur - croisement Diderot",
+        "measures": "vehicle",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Vers le Sud\"}, {\"id\": \"direction_2\", \"name\": \"Vers le Nord\"}]",
+        "classes": "all",
+        "location": [
+          48.848157,
+          2.394386
+        ],
+        "measure_2": "bike",
+        "type": "turnstile",
+        "id": 7046
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.394300699234009,
+          48.84807841200361
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Cercle exterieur - croisement Fbg St Antoine",
+        "measures": "vehicle",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Vers le Sud\"}, {\"id\": \"direction_2\", \"name\": \"Vers le Nord\"}]",
+        "classes": "all",
+        "location": [
+          48.848653,
+          2.394359
+        ],
+        "measure_2": "bike",
+        "type": "turnstile",
+        "id": 7041
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.394359,
+          48.848653
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Cercle exterieur - croisement P-Auguste",
+        "measures": "vehicle",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Vers l'Ouest\"}, {\"id\": \"direction_2\", \"name\": \"Vers l'Est\"}]",
+        "classes": "all",
+        "location": [
+          48.849389,
+          2.395386
+        ],
+        "measure_2": "bike",
+        "type": "turnstile",
+        "id": 6187
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.3953869938850407,
+          48.84940394604453
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Cercle exterieur - niveau Dorian",
+        "measures": "vehicle",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Vers l'Est\"}, {\"id\": \"direction_2\", \"name\": \"Vers l'Ouest\"}]",
+        "classes": "all",
+        "location": [
+          48.847786,
+          2.394617
+        ],
+        "measure_2": "bike",
+        "type": "turnstile",
+        "id": 7074
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.394555509090424,
+          48.84778188294131
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Cercle exterieur - niveau Trone",
+        "measures": "vehicle",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Vers le Nord\"}, {\"id\": \"direction_2\", \"name\": \"Vers le Sud\"}]",
+        "classes": "all",
+        "location": [
+          48.848547,
+          2.397538
+        ],
+        "measure_2": "bike",
+        "type": "turnstile",
+        "id": 7067
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.397538,
+          48.848547
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Cercle exterieur - niveau Voltaire",
+        "measures": "vehicle",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Vers le Sud\"}, {\"id\": \"direction_2\", \"name\": \"Vers le Nord\"}]",
+        "classes": "all",
+        "location": [
+          48.849032,
+          2.39466
+        ],
+        "measure_2": "bike",
+        "type": "turnstile",
+        "id": 7056
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.3946118354797368,
+          48.849031529239284
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Cercle interieur - niveau Fabre d'Eglantine",
+        "measures": "vehicle",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Sens inverse\"}, {\"id\": \"direction_2\", \"name\": \"Sens de circulation\"}]",
+        "classes": "all",
+        "location": [
+          48.847868,
+          2.395724
+        ],
+        "measure_2": "bike",
+        "type": "turnstile",
+        "id": 7118
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.3959878087043767,
+          48.8480201653621
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Cercle interieur - niveau P-Auguste",
+        "measures": "vehicle",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Sens inverse\"}, {\"id\": \"direction_2\", \"name\": \"Sens de circulation\"}]",
+        "classes": "all",
+        "location": [
+          48.848936,
+          2.395687
+        ],
+        "measure_2": "bike",
+        "type": "turnstile",
+        "id": 7062
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.3956525325775146,
+          48.84902093914742
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Cercle interieur - niveau Taillebourg",
+        "measures": "vehicle",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Sens inverse\"}, {\"id\": \"direction_2\", \"name\": \"Sens de circulation normal\"}]",
+        "classes": "all",
+        "location": [
+          48.848702,
+          2.396625
+        ],
+        "measure_2": "bike",
+        "type": "turnstile",
+        "id": 6196
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.39677906036377,
+          48.84870323535082
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Chemin nord est - Ilot central",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Vers l'Est\"}, {\"id\": \"direction_2\", \"name\": \"Vers l'Ouest\"}]",
+        "classes": "all",
+        "location": [
+          48.848592,
+          2.39617
+        ],
+        "type": "turnstile",
+        "id": 7059
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.39617,
+          48.848592
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Chemin nord ouest - Ilot central",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Vers l'Est \"}, {\"id\": \"direction_2\", \"name\": \"Vers l'Ouest\"}]",
+        "classes": "all",
+        "location": [
+          48.848596,
+          2.395659
+        ],
+        "type": "turnstile",
+        "id": 7060
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.395659,
+          48.848596
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Contre-allees nord - Trone",
+        "measures": "vehicle",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Vers l'Ouest\"}, {\"id\": \"direction_2\", \"name\": \"Vers l'Est\"}]",
+        "classes": "all",
+        "location": [
+          48.848458,
+          2.397756
+        ],
+        "measure_2": "bike",
+        "type": "turnstile",
+        "id": 7068
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.397756,
+          48.848458
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Fbg Saint Antoine",
+        "measures": "vehicle",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Vers l'Est\"}, {\"id\": \"direction_2\", \"name\": \"Vers l'Ouest\"}]",
+        "classes": "all",
+        "location": [
+          48.848625,
+          2.394296
+        ],
+        "measure_2": "bike",
+        "type": "turnstile",
+        "id": 7042
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.394296,
+          48.848625
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Muret et pelouse - Trone Bel Air",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Traffic in\"}, {\"id\": \"direction_2\", \"name\": \"Traffic out\"}]",
+        "classes": "all",
+        "location": [
+          48.847882,
+          2.396789
+        ],
+        "type": "area",
+        "id": 6202
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.396789,
+          48.847882
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Passage - Bel Air Fabre d'Eglantine",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Direction 1\"}, {\"id\": \"direction_2\", \"name\": \"Direction 2\"}]",
+        "classes": "all",
+        "location": [
+          48.847629,
+          2.396243
+        ],
+        "type": "turnstile",
+        "id": 7124
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.3962667584419255,
+          48.84763008762274
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Passage entre bouches metro RER - Taillebourg",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Vers arret de bus\"}, {\"id\": \"direction_2\", \"name\": \"Vers metro - RER\"}]",
+        "classes": "all",
+        "location": [
+          48.848783,
+          2.397024
+        ],
+        "type": "turnstile",
+        "id": 6193
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.397024,
+          48.848783
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Passage pieton - Diderot",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Vers le Nord\"}, {\"id\": \"direction_2\", \"name\": \"Vers le Sud\"}]",
+        "classes": "all",
+        "location": [
+          48.84816,
+          2.394242
+        ],
+        "type": "turnstile",
+        "id": 7047
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.394242,
+          48.84816
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Passage pieton - P-Auguste croisement cercle exterieur",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Vers l'Ouest\"}, {\"id\": \"direction_2\", \"name\": \"Vers l'Est\"}]",
+        "classes": "all",
+        "location": [
+          48.84945,
+          2.395255
+        ],
+        "type": "turnstile",
+        "id": 6185
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.395201921463013,
+          48.84944454107391
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Passage pieton - Taillebourg niveau cercle interieur",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Traversee Taillebourg\"}, {\"id\": \"direction_2\", \"name\": \"Vers arret de bus\"}]",
+        "classes": "all",
+        "location": [
+          48.848817,
+          2.396747
+        ],
+        "type": "turnstile",
+        "id": 6198
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.39677369594574,
+          48.848793251631186
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Passage pieton - Trone",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Vers le Nord\"}, {\"id\": \"direction_2\", \"name\": \"Vers le Sud\"}]",
+        "classes": "all",
+        "location": [
+          48.848246,
+          2.397704
+        ],
+        "type": "turnstile",
+        "id": 7072
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.397704,
+          48.848246
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Passage pieton est - Dorian",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Vers le Sud\"}, {\"id\": \"direction_2\", \"name\": \"Vers le Nord\"}]",
+        "classes": "all",
+        "location": [
+          48.847608,
+          2.394815
+        ],
+        "type": "turnstile",
+        "id": 7075
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.394804954528809,
+          48.847584195924206
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Passage pieton nord - cercle exterieur Diderot",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Vers l'Ouest\"}, {\"id\": \"direction_2\", \"name\": \"Vers l'Est\"}]",
+        "classes": "all",
+        "location": [
+          48.848312,
+          2.394382
+        ],
+        "type": "turnstile",
+        "id": 7048
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.3944240808486943,
+          48.84832375317413
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Passage pieton nord - Ilot central",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Direction 1\"}, {\"id\": \"direction_2\", \"name\": \"Direction 2\"}]",
+        "classes": "all",
+        "location": [
+          48.849008,
+          2.395735
+        ],
+        "type": "turnstile",
+        "id": 7061
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.395800054073334,
+          48.849029764224106
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Passage pieton nord - Trone cote Ilot",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Vers le Nord\"}, {\"id\": \"direction_2\", \"name\": \"Vers le Sud\"}]",
+        "classes": "all",
+        "location": [
+          48.848474,
+          2.397337
+        ],
+        "type": "turnstile",
+        "id": 7069
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.397337,
+          48.848474
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Passage pieton sud - cercle exterieur Diderot",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Vers l'Ouest\"}, {\"id\": \"direction_2\", \"name\": \"Vers l'Est\"}]",
+        "classes": "all",
+        "location": [
+          48.848125,
+          2.394412
+        ],
+        "type": "turnstile",
+        "id": 7049
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.394357025623322,
+          48.848080177052324
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Passage pieton sud - Ilot central",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Vers le Nord\"}, {\"id\": \"direction_2\", \"name\": \"Vers le Sud\"}]",
+        "classes": "all",
+        "location": [
+          48.847978,
+          2.395715
+        ],
+        "type": "turnstile",
+        "id": 7119
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.3956149816513066,
+          48.8481560740869
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Piste cyclable - Taillebourg Bouvines",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Vers l'Ouest\"}, {\"id\": \"direction_2\", \"name\": \"Vers l'Est\"}]",
+        "classes": "all",
+        "location": [
+          48.849244,
+          2.396777
+        ],
+        "measure_2": "bike",
+        "type": "turnstile",
+        "id": 7036
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.3967629671096806,
+          48.849172730249755
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Piste cyclable cercle exterieur - P-Auguste",
+        "measures": "bike",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Vers l'Ouest\"}, {\"id\": \"direction_2\", \"name\": \"Vers l'Est\"}]",
+        "classes": "all",
+        "location": [
+          48.849312,
+          2.395233
+        ],
+        "type": "turnstile",
+        "id": 6186
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.3951992392539982,
+          48.849347465948945
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Sortie RER - Taillebourg",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Entree\"}, {\"id\": \"direction_2\", \"name\": \"Sortie\"}]",
+        "classes": "all",
+        "location": [
+          48.848834,
+          2.397063
+        ],
+        "type": "turnstile",
+        "id": 6191
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.397063,
+          48.848834
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Terrain de petanque - P-Auguste Bouvines",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Entree terrain de petanque\"}, {\"id\": \"direction_2\", \"name\": \"Sortie terrain de petanque\"}, {\"id\": \"occupancy\", \"name\": \"Average occupancy\"}]",
+        "classes": "all",
+        "location": [
+          48.849229,
+          2.395766
+        ],
+        "type": "area",
+        "id": 6182
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.395766,
+          48.849229
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Terrain petanque - Taillebourg Bouvines",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Traffic in\"}, {\"id\": \"direction_2\", \"name\": \"Traffic out\"}, {\"id\": \"occupancy\", \"name\": \"Average occupancy\"}]",
+        "classes": "all",
+        "location": [
+          48.849175,
+          2.396581
+        ],
+        "type": "area",
+        "id": 7037
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.396581,
+          48.849175
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Terre plein - Bel Air Fabre d'Eglantine",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Traffic in\"}, {\"id\": \"direction_2\", \"name\": \"Traffic out\"}, {\"id\": \"occupancy\", \"name\": \"Average occupancy\"}]",
+        "classes": "all",
+        "location": [
+          48.847552,
+          2.396243
+        ],
+        "type": "area",
+        "id": 7123
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.396226525306702,
+          48.84753653911584
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Terre plein - derriere Kiosque",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Vers le Nord\"}, {\"id\": \"direction_2\", \"name\": \"Vers le Sud\"}]",
+        "classes": "all",
+        "location": [
+          48.848128,
+          2.394802
+        ],
+        "type": "turnstile",
+        "id": 6178
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.394802,
+          48.848128
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Terre plein - Kiosque",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Vers le Nord\"}, {\"id\": \"direction_2\", \"name\": \"Vers le Sud\"}]",
+        "classes": "all",
+        "location": [
+          48.84802,
+          2.3947
+        ],
+        "type": "turnstile",
+        "id": 6177
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.3947,
+          48.84802
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Terre plein - Trone Bel Air",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Vers le Nord\"}, {\"id\": \"direction_2\", \"name\": \"Vers le Sud\"}]",
+        "classes": "all",
+        "location": [
+          48.847805,
+          2.396794
+        ],
+        "type": "turnstile",
+        "id": 6201
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.396794,
+          48.847805
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Trafic Ilot - Dorian Fabre d'Eglantine",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Vers l'Est\"}, {\"id\": \"direction_2\", \"name\": \"Vers l'Ouest\"}]",
+        "classes": "all",
+        "location": [
+          48.847672,
+          2.395391
+        ],
+        "type": "turnstile",
+        "id": 7040
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.395391,
+          48.847672
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Trottoir est - P-Auguste",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Traffic in\"}, {\"id\": \"direction_2\", \"name\": \"Traffic out\"}]",
+        "classes": "all",
+        "location": [
+          48.849469,
+          2.395405
+        ],
+        "measure_2": "bike",
+        "type": "area",
+        "id": 6183
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.395405,
+          48.849469
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Trottoir nord - Diderot",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Traffic in\"}, {\"id\": \"direction_2\", \"name\": \"Traffic out\"}, {\"id\": \"occupancy\", \"name\": \"Average occupancy\"}]",
+        "classes": "all",
+        "location": [
+          48.8483,
+          2.394248
+        ],
+        "type": "area",
+        "id": 7050
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.394248,
+          48.8483
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Trottoir nord - Fbg St Antoine",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Traffic in\"}, {\"id\": \"direction_2\", \"name\": \"Traffic out\"}, {\"id\": \"occupancy\", \"name\": \"Average occupancy\"}]",
+        "classes": "all",
+        "location": [
+          48.848739,
+          2.394272
+        ],
+        "type": "area",
+        "id": 7043
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.394272,
+          48.848739
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Trottoir nord - Trone",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Vers l'Ouest\"}, {\"id\": \"direction_2\", \"name\": \"Vers l'Est\"}]",
+        "classes": "all",
+        "location": [
+          48.84855,
+          2.397699
+        ],
+        "type": "turnstile",
+        "id": 7070
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.397699,
+          48.84855
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Trottoir nord - Voltaire",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Vers l'Ouest\"}, {\"id\": \"direction_2\", \"name\": \"Vers l'Est\"}]",
+        "classes": "all",
+        "location": [
+          48.849259,
+          2.394737
+        ],
+        "type": "turnstile",
+        "id": 7057
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.394737,
+          48.849259
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Trottoir ouest - Dorian",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Traffic in\"}, {\"id\": \"direction_2\", \"name\": \"Traffic out\"}, {\"id\": \"occupancy\", \"name\": \"Average occupancy\"}]",
+        "classes": "all",
+        "location": [
+          48.847777,
+          2.394456
+        ],
+        "type": "area",
+        "id": 7076
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.394456,
+          48.847777
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Trottoir ouest - P-Auguste",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Traffic in\"}, {\"id\": \"direction_2\", \"name\": \"Traffic out\"}, {\"id\": \"occupancy\", \"name\": \"Average occupancy\"}]",
+        "classes": "all",
+        "location": [
+          48.849408,
+          2.395133
+        ],
+        "type": "area",
+        "id": 6184
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.3950946331024174,
+          48.849430421067424
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Trottoir sud - Fbg St Antoine",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Traffic in\"}, {\"id\": \"direction_2\", \"name\": \"Traffic out\"}, {\"id\": \"occupancy\", \"name\": \"Average occupancy\"}]",
+        "classes": "all",
+        "location": [
+          48.848537,
+          2.394217
+        ],
+        "type": "area",
+        "id": 7044
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.394217,
+          48.848537
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Trottoir sud - Taillebourg cercle interieur",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Vers arret de bus\"}, {\"id\": \"direction_2\", \"name\": \"Vers Taillebourg\"}]",
+        "classes": "all",
+        "location": [
+          48.848776,
+          2.396769
+        ],
+        "type": "turnstile",
+        "id": 6199
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.3968917131423955,
+          48.848826787066805
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Trottoir sud - Voltaire",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Traffic in\"}, {\"id\": \"direction_2\", \"name\": \"Traffic out\"}, {\"id\": \"occupancy\", \"name\": \"Average occupancy\"}]",
+        "classes": "all",
+        "location": [
+          48.849061,
+          2.394501
+        ],
+        "type": "area",
+        "id": 7058
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.394501,
+          48.849061
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Vers metro - Kiosque",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Vers la bouche de metro\"}, {\"id\": \"direction_2\", \"name\": \"Vers l'Est\"}]",
+        "classes": "all",
+        "location": [
+          48.847967,
+          2.394807
+        ],
+        "measure_2": "bike",
+        "type": "turnstile",
+        "id": 6179
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.394807,
+          48.847967
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Vers Taillebourg - Trone",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Vers Taillebourg\"}, {\"id\": \"direction_2\", \"name\": \"Vers metro - RER\"}]",
+        "classes": "all",
+        "location": [
+          48.848823,
+          2.397147
+        ],
+        "measure_2": "bike",
+        "type": "turnstile",
+        "id": 6195
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.397147,
+          48.848823
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Vers Trone - Taillebourg",
+        "measures": "ped",
+        "metrics": "[{\"id\": \"direction_1\", \"name\": \"Vers metro - RER\"}, {\"id\": \"direction_2\", \"name\": \"Vers Trone\"}]",
+        "classes": "all",
+        "location": [
+          48.848692,
+          2.397164
+        ],
+        "type": "turnstile",
+        "id": 6194
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.397164,
+          48.848692
+        ]
+      }
+    }
+  ]
+}

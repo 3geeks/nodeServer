@@ -2,42 +2,148 @@ var
   express = require('express'),             // express framework
   router = express.Router(),                // the router
   Promise = require('bluebird'),            // better promises than native ones
-  Waterline = require('waterline'),         // the ORM
-  memoryAdapter = require('sails-memory'),  // the adapter for the database
   fs = require('fs'),                       // use the filesystem
+  _ = require('lodash'),
+  utils = require('../utils'),
 
-  waterlineConfig = {                       // the waterline configuration
-    adapters: {
-      'memory': memoryAdapter               // named adapters
-    },
-    connections: {
-      default: {
-        adapter: 'memory'                   // which is the default adapter to use ?
-      }
-    }
+  businessClasses = require('../datamodels'), // all the data models
+  zonesGJ = require('../public/data/zones.json'), // all the zones
+  sensorsGJ = require('../public/data/sensors.json'), // the sensors
+
+  gameReady = false,                        // is the game ready yet ?
+  gameStarted = false,                      // is the game started
+
+  // business objects
+  players = {
+    A: {},
+    B: {}
   },
+  sensors = [],
+  bases = {},
 
-  dataModels = require('../datamodels'),    // all the data models
-  fixtures = require('../fixtures.json'),   // the fixtures
-  zones = require('../public/data/zones.json'), // all the zones
+  // internal objects
+  mainLoop,                            // the main loop function
+  mainLoopTimer,                            // setInterval object
+  stackPointer = 0,                         // the pointer to the stack
+  movingPeonsStack = [];                    // the moving peons stack
 
-  waterline = new Waterline(),              // waterline instance
-  DataStores = {},                          // the exposed data stores (via waterline)
-  gameReady = false;                        // is the game ready yet ?
+/**********************************************************************************************************************
+  Business objects init
+ **********************************************************************************************************************/
+function setUp() {
+  console.log('========= Setup begins.');
+  // 1. players
+  players.A = new businessClasses.Player('A', {
+    name: 'Bastion A',
+    coordinates: [
+      2.3971411585807805,
+      48.84827962715297
+    ]
+  });
+  players.B = new businessClasses.Player('B', {
+    name: 'Bastion B',
+    coordinates: [
+      2.3957705497741704,
+      48.84763361775165
+    ]
+  });
 
-// bootstrap functions
-Object.keys(dataModels).forEach(modelName => {
-  waterline.loadCollection(dataModels[modelName]);  // load all data collections models
-});
+  // 2. sensors
+  sensorsGJ.features.forEach(feature => {
+    var name, id, type, coef, coordinates;
+    name = feature.properties.name;
+    id = feature.properties.id;
+    if (feature.properties.measure_2 === 'bike') {
+      type = 'bike';
+    } else {
+      type = feature.properties.measure;
+    }
+    switch (type) {
+      case 'ped':
+        coef = 4;
+        break;
+      case 'bike':
+        coef = 2;
+        break;
+      case 'vehicule':
+        coef = 1;
+    }
+    coordinates = feature.geometry.coordinates;
+    sensors.push(new businessClasses.Sensor(name, id, type, coef, coordinates));
+  });
 
-// initialize waterline (connection to DB, table/collections creation....
-waterline.initialize(waterlineConfig, (err, ontology) => {
-  if (err) {
-    return console.error(err);
+  // 3. bases
+  zonesGJ.features.forEach(feature => {
+    var name, geometry, baseSensors=[];
+    name = feature.properties.name;
+    geometry = feature.geometry.coordinates;
+    sensors.forEach(sensor => {
+      if (sensor.isIn(geometry)) {
+        baseSensors.push(sensor);
+      }
+    });
+
+    bases[name] = new businessClasses.Base(name, players, geometry, baseSensors);
+  });
+
+  // 4. moving peons stack
+  movingPeonsStack = _.fill(Array(10), []);
+
+  gameReady = true;
+  console.log('========= Setup ends.');
+}
+
+/**********************************************************************************************************************
+ Loops
+ **********************************************************************************************************************/
+
+mainLoop = () => {
+  console.log('====== New tick:', stackPointer);
+  if (!gameReady) {
+    console.log('!!!! Game not ready yet!');
+    return;
   }
+  // harvest
+  Object.keys(bases).forEach(baseName => {
+    bases[baseName].harvestEnergy();
+  });
 
-  DataStores = ontology.collections;        // expose the data stores
-});
+  // move peons
+  if (!movingPeonsStack[stackPointer]) {
+    stackPointer++;
+    if (stackPointer == 11) {
+      stackPointer = 0;
+    }
+    return;
+  }
+  return Promise.all(movingPeonsStack[stackPointer])
+    .then(() => {
+      // report ownerships
+      players.A.bases = {};
+      players.B.bases = {};
+      Object.keys(bases).forEach(base => {
+        if (base.owner) {
+          players[base.owner].bases[base.name] = base;
+        }
+      });
+
+      // empty the current stack tasks
+      movingPeonsStack[stackPointer] = [];
+
+      // step up into the stack
+      stackPointer++;
+      if (stackPointer == 11) {
+        stackPointer = 0;
+      }
+    })
+    .catch(e => {
+      console.log ('ERROR main loop:', e, movingPeonsStack[stackPointer], stackPointer, movingPeonsStack);
+    });
+};
+
+setUp();
+
+mainLoopTimer = setInterval(mainLoop, 1 * 1000);
 
 /**********************************************************************************************************************
   Routes definitions
@@ -70,69 +176,60 @@ router.get('/zones.json', (req, res, next) => {
   -
  */
 router.get('/reset', (req, res, next) => {
-  var promises = [];
+  setUp();
+  // operations are done: go to the index
+  gameReady = true;
+  console.log('Game ready!');
+  res.redirect('/');
+});
 
-  // 1. delete all data
-  promises.push(Object.keys(DataStores)
-    .forEach(store => {
-      console.log('Destroying', store);
-      return DataStores[store].destroy();
-    })
-  );
-
-  // 2. push the fixtures
-  promises.push(Object.keys(fixtures)
-    .forEach(store => {
-      console.log('Importing fixtures for', store);
-      fixtures[store].forEach(data => {
-        return DataStores[store].create(data);
-      });
-    })
-  );
-
-  // perform all operations
-  Promise.all(promises)
-    .then(() => {
-      // operations are done: go to the index
-      gameReady = true;
-      console.log('Game ready!');
-      res.redirect('/');
-    });
+// scores
+router.get('/scores', (req, res, next) => {
+  res.json({
+    status: true,
+    A: players.A.energy,
+    B: players.B.energy
+  });
 });
 
 /*
   Endpoints
  */
 
-// combien de peons pour :player
+// combien de peons pour :player (implémenté)
 router.get('/status/peons/:player', (req, res, next) => {
+  var player = players[req.param('player')];
   res.json({
     success: true,
-    result: 10
+    result: player.peons.toCreate
   });
 });
 
-// quel score pour :player
+// quel score pour :player (implémenté)
 router.get('/status/score/:player', (req, res, next) => {
+  var player = players[req.param('player')];
   res.json({
     success: true,
-    result: 10
+    result: player.energy
   });
 });
 
-// combien de péons dans :zone pour :player
+// combien de péons dans :zone pour :player (implémenté)
 router.get('/status/peons/:player/zones/:zone', (req, res, next) => {
+  var
+    base = bases[req.param('zone')],
+    player = req.param('player');
   res.json({
     success: true,
-    result: 10
+    result: base.peons[player]
   });
 });
 
-// liste des zones de :player
+// liste des zones de :player (implémenté)
 router.get('/status/zones/:player', (req, res, next) => {
   res.json({
     success: true,
-    result: 10
+    result: Object.keys(players[req.param('player')])
   });
 });
 
@@ -140,7 +237,7 @@ router.get('/status/zones/:player', (req, res, next) => {
 router.get('/status/zones', (req, res, next) => {
   var z = [];
 
-  zones.features.forEach(feature => {
+  zonesGJ.features.forEach(feature => {
     z.push(feature.properties.name);
   });
 
@@ -150,22 +247,91 @@ router.get('/status/zones', (req, res, next) => {
   });
 });
 
-// envoyer des péons de :player
+// envoyer des péons de :player (implémenté, manque websocket)
 router.post('/cmd/send/:player', (req, res, next) => {
   //{"nb":5,"zone":"2"}
-  res.json({
-    success: true,
-    total: 10
-  });
+  var player, nb, base, i, name, sp;
+
+  player = players[req.params.player];
+  nb = req.body.nb;
+  base = bases[req.body.zone];
+  name = utils.generateName();
+
+  if (player.peons.toCreate >= nb) {
+    // if there are enough peons
+    player.peons.toCreate -= nb;
+    // decrement the peons nb
+    for (i = 0; i < nb; i++) {
+      player.peons.alive[name] = new businessClasses.Peon(name, player, base);
+      // todo envoyer le peon en websocket au front
+      sp = stackPointer - 1;
+      if (sp < 0) {
+        sp = 10;
+      }
+
+      // add the task to the stack
+      if (!movingPeonsStack[sp]) {
+        movingPeonsStack[sp] = [];
+      }
+      movingPeonsStack[sp].push(
+        function() {new Promise(function (resolve) {
+          // - add the peon to the base for the player
+          // - remove a peon from the base for the opposite player
+          if (base.peons[player.name] < 3) {
+            base.peons[player.name]++;
+          }
+          if (player.name == 'A') {
+            base.peons.B--
+            if (base.peons.B < 0) {
+              base.peons.B = 0
+            }
+          } else {
+            base.peons.A--;
+            if (base.peons.A < 0) {
+              base.peons.A = 0
+            }
+          }
+
+          // - kill the peon
+          delete player.peons.alive[name];
+
+          // - compute ownership
+          if (base.peons.A === 3) {
+            base.owner = players.A;
+          }
+          if (base.peons.B === 3) {
+            base.owner = players.B;
+          }
+          // todo send feedback to the front via websocket
+
+          resolve(true);
+        })}
+      );
+    }
+    res.json({
+      success: true,
+      total: player.peons.toCreate
+    });
+
+  }
 });
 
-// créer des péons de :player
+// créer des péons de :player (implémenté)
 router.post('/cmd/create/:player', (req, res, next) => {
   //{"nb":5}
-  res.json({
-    success: true,
-    total: 10
-  });
+  var player = players[req.param('player')];
+  if (players.createPeon(req.param('nb'))) {
+    res.json({
+      success: true,
+      total: player.peons.toCreate
+    });
+  } else {
+    res.json({
+      success: false,
+      message: 'Pas assez d\'énergie, vous en avez ' + player.energy
+    });
+  }
+
 });
 
 module.exports = router;

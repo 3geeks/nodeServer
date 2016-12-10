@@ -25,10 +25,7 @@ html, body, #map {
   font-weight: bold;
   padding: 1px 6px;
   position: absolute;
-  -webkit-user-select: none;
-    -webkit-user-select--moz-user-select: none;
-      -webkit-user-select--moz-user-select--ms-user-select: none;
-        -webkit-user-select--moz-user-select--ms-user-select-user-select: none;
+  user-select: none;
   white-space: nowrap;
   z-index: 6; }
 
@@ -61,9 +58,9 @@ html, body, #map {
   display: block;
   text-align: center;
   font-weight: bold;
-  color: #623880;
+  color: #000;
   text-transform: uppercase;
-  text-shadow: white 1px 0px 1px, white -1px 0px 1px, white 0px -1px 1px, white 0px 1px 1px; }
+  text-shadow: black 1px 0 1px, black -1px 0 1px, black 0 -1px 1px, black 0 1px 1px; }
 
 .parallax-marker.label.huge {
   font-size: 96px;
@@ -76,18 +73,21 @@ html, body, #map {
 .parallax-marker.label.medium {
   font-size: 16px;
   color: #79557d;
-  font-weight: normal; }
+  font-weight: bold;
+  z-index: 9999 !important; }
 
 .parallax-marker.label.a {
-  color: #ff0000 !important; }
+  color: #ff0000 !important;
+  text-shadow: 1px 1px 1px black; }
 
 .parallax-marker.label.b {
-  color: #0000ff !important; }
+  color: #0000ff !important;
+  text-shadow: 1px 1px 1px white; }
 
 .parallax-marker.label.small {
   font-size: 12px;
   text-transform: none;
   font-weight: normal;
-  color: #898090; }
+  color: #fff; }
 
 /*# sourceMappingURL=style.css.map */
