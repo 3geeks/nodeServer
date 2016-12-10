@@ -6,4 +6,4 @@ sudo npm install -g bower
 npm install
 bower install
 pm2 kill
-pm2 start ./bin/www --name NationWar --watch --ignore-watch ./public/stylesheets/*.css*
+pm2 start pm2.json

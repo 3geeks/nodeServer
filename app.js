@@ -9,6 +9,11 @@ var index = require('./routes/index');
 
 var app = express();
 
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+
+server.listen(3000);
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -26,7 +31,10 @@ app.use(require('node-sass-middleware')({
   sourceMap: true
 }));
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(function(req, res, next){
+  res.io = io;
+  next();
+});
 app.use('/', index);
 
 // catch 404 and forward to error handler
@@ -47,4 +55,4 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+module.exports = {app: app, server: server};

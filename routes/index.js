@@ -22,7 +22,7 @@ var
   bases = {},
 
   // internal objects
-  mainLoop,                            // the main loop function
+  mainLoop,                                 // the main loop function
   mainLoopTimer,                            // setInterval object
   stackPointer = 0,                         // the pointer to the stack
   movingPeonsStack = [];                    // the moving peons stack
@@ -263,7 +263,7 @@ router.post('/cmd/send/:player', (req, res, next) => {
     // decrement the peons nb
     for (i = 0; i < nb; i++) {
       player.peons.alive[name] = new businessClasses.Peon(name, player, base);
-      // todo envoyer le peon en websocket au front
+      res.io.emit('peon', {name: 'toto'});
       sp = stackPointer - 1;
       if (sp < 0) {
         sp = 10;

@@ -82,4 +82,15 @@ $(function() {
   icon =  L.divIcon({className: 'parallax-marker label medium b', html: 'Bastion B', iconSize: [200, 36], iconAnchor: [100, 18]});
   L.parallaxMarker(L.latLng(bastionsLocations.B), {icon: icon, parallaxZoffset: 0}).addTo(map);
 
+  /*
+    SocketIo interractions
+   */
+
+  var socket = io.connect('http://' + window.location.hostname + ':3000');
+
+  socket.on('peon', function (peon) {
+    console.log(peon);
+  });
+
+
 });

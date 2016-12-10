@@ -1,0 +1,17 @@
+{
+  apps : [{
+    name        : "NationGo",
+    script      : "./bin/www",
+    watch       : true,
+    env: {
+      "NODE_ENV": "development",
+    },
+    env_production : {
+      "NODE_ENV": "production"
+    },
+    "ignore_watch" : ["node_modules", "public", ".idea", ".gitignore", "README.md"],
+    "watch_options": {
+      "followSymlinks": false
+    }
+  }]
+}
