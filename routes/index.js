@@ -19,6 +19,7 @@ var
 
   dataModels = require('../datamodels'),    // all the data models
   fixtures = require('../fixtures.json'),   // the fixtures
+  zones = require('../public/data/zones.json'), // all the zones
 
   waterline = new Waterline(),              // waterline instance
   DataStores = {},                          // the exposed data stores (via waterline)
@@ -97,6 +98,74 @@ router.get('/reset', (req, res, next) => {
       console.log('Game ready!');
       res.redirect('/');
     });
+});
+
+/*
+  Endpoints
+ */
+
+// combien de peons pour :player
+router.get('/status/peons/:player', (req, res, next) => {
+  res.json({
+    success: true,
+    result: 10
+  });
+});
+
+// quel score pour :player
+router.get('/status/score/:player', (req, res, next) => {
+  res.json({
+    success: true,
+    result: 10
+  });
+});
+
+// combien de péons dans :zone pour :player
+router.get('/status/peons/:player/zones/:zone', (req, res, next) => {
+  res.json({
+    success: true,
+    result: 10
+  });
+});
+
+// liste des zones de :player
+router.get('/status/zones/:player', (req, res, next) => {
+  res.json({
+    success: true,
+    result: 10
+  });
+});
+
+// liste des zones (implémenté)
+router.get('/status/zones', (req, res, next) => {
+  var z = [];
+
+  zones.features.forEach(feature => {
+    z.push(feature.properties.name);
+  });
+
+  res.json({
+    success: true,
+    result: z
+  });
+});
+
+// envoyer des péons de :player
+router.post('/cmd/send/:player', (req, res, next) => {
+  //{"nb":5,"zone":"2"}
+  res.json({
+    success: true,
+    total: 10
+  });
+});
+
+// créer des péons de :player
+router.post('/cmd/create/:player', (req, res, next) => {
+  //{"nb":5}
+  res.json({
+    success: true,
+    total: 10
+  });
 });
 
 module.exports = router;
