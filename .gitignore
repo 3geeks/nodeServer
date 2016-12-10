@@ -30,4 +30,7 @@ node_modules
 npm-debug.log
 
 .idea
-public/vendor
+public/vendor/jquery
+public/vendor/leaflet
+public/vendor/Leaflet.label
+
