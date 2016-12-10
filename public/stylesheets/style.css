@@ -57,4 +57,37 @@ html, body, #map {
 .leaflet-label-left:after {
   content: ""; }
 
+.parallax-marker.label {
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  color: #623880;
+  text-transform: uppercase;
+  text-shadow: white 1px 0px 1px, white -1px 0px 1px, white 0px -1px 1px, white 0px 1px 1px; }
+
+.parallax-marker.label.huge {
+  font-size: 96px;
+  color: rgba(185, 157, 185, 0.39);
+  text-shadow: none; }
+
+.parallax-marker.label.big {
+  font-size: 24px; }
+
+.parallax-marker.label.medium {
+  font-size: 16px;
+  color: #79557d;
+  font-weight: normal; }
+
+.parallax-marker.label.a {
+  color: #ff0000 !important; }
+
+.parallax-marker.label.b {
+  color: #0000ff !important; }
+
+.parallax-marker.label.small {
+  font-size: 12px;
+  text-transform: none;
+  font-weight: normal;
+  color: #898090; }
+
 /*# sourceMappingURL=style.css.map */

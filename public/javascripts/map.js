@@ -28,27 +28,34 @@ $(function() {
     }).setOpacity(0.6).addTo(map);
 
   // import zones
-  $.getJSON('zones.json?' + Date.now(), function (zonesGJ) {
+  $.getJSON('zones.json', function (zonesGJ) {
     zonesGJ.features.forEach(function(feature) {
-      var color, opacity, fillColor, fillOpacity = 0.8, coords = [[]];
+      var color, opacity, fillColor, fillOpacity = 0.8, coords = [[]], center, icon, parallaxZoffset;
+
       switch (feature.properties.owner) {
         case 'A':
           color = '#ff0000';
           fillColor ='#ff0000';
           opacity = 0.6;
           fillOpacity = 0.8;
+          parallaxZoffset = 1;
+          icon =  L.divIcon({className: 'parallax-marker label medium a', html: feature.properties.name, iconSize: [200, 36], iconAnchor: [100, 18]});
           break;
         case 'B':
           color = '#0000ff';
           fillColor ='#0000ff';
           opacity = 0.6;
           fillOpacity = 0.8;
+          parallaxZoffset = 1;
+          icon =  L.divIcon({className: 'parallax-marker label medium b', html: feature.properties.name, iconSize: [200, 36], iconAnchor: [100, 18]});
           break;
         default:
           color ='#000000';
           fillColor ='#cccccc';
           opacity = 0.8;
           fillOpacity = 0.8;
+          parallaxZoffset = 0.2;
+          icon =  L.divIcon({className: 'parallax-marker label small', html: feature.properties.name, iconSize: [200, 36], iconAnchor: [100, 18]});
           break;
       }
       feature.geometry.coordinates[0].forEach(function(ll) {
@@ -57,6 +64,7 @@ $(function() {
         point.push(ll[0]);
         coords[0].push(point);
       });
+
       zones[feature.properties.name] = L.polygon(coords, {
         dashArray: '4,2',
         weight: 1,
@@ -64,7 +72,10 @@ $(function() {
         fillColor: fillColor,
         opacity: opacity,
         fillOpacity: fillOpacity
-      }).bindLabel(feature.properties.name, { noHide: true }).addTo(map);
+      }).addTo(map);
+
+      center = zones[feature.properties.name].getBounds().getCenter();
+      L.parallaxMarker(center, {icon: icon, parallaxZoffset: 0.2}).addTo(map);
     });
   });
 });
