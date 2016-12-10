@@ -18,6 +18,41 @@ var
   bastions = {
     A: null, B: null
   },
+  peons = {},
+  peonsIcon = {
+    A: L.icon({
+      iconUrl: './images/player-B.png',
+
+      iconSize: [10, 10],
+      iconAnchor: [5, 5],
+      popupAnchor: [5, 0],
+      className: 'peon'
+    }),
+    B: L.icon({
+      iconUrl: './images/player-A.png',
+
+      iconSize: [10, 10],
+      iconAnchor: [5, 5],
+      popupAnchor: [5, 0],
+      className: 'peon'
+    })
+  },
+  bastionsIcon = {
+    A: L.icon({
+      iconUrl: './images/bastion-B.png',
+
+      iconSize: [78, 79],
+      iconAnchor: [39, 39],
+      popupAnchor: [39, 0]
+    }),
+    B: L.icon({
+      iconUrl: './images/bastion-A.png',
+
+      iconSize: [78, 79],
+      iconAnchor: [39, 39],
+      popupAnchor: [39, 0]
+    })
+  },
   mapLink = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
     //'<a href="http://carto.com/basemaps">Map tiles by Carto, under CC BY 3.0. Data by OpenStreetMap, under ODbL</a>';
     //'<a href="http://maps.stamen.com/#watercolor/">Map tiles by Stamen</a>. <a href="http://openstreetmap.org">Data by OpenStreetMap, under ODbL</a>';
@@ -74,13 +109,8 @@ $(function() {
     });
   });
 
-  bastions.A = L.marker(L.latLng(bastionsLocations.A)).addTo(map);
-  var icon =  L.divIcon({className: 'parallax-marker label medium a', html: 'Bastion A', iconSize: [200, 36], iconAnchor: [100, 18]});
-  L.parallaxMarker(L.latLng(bastionsLocations.A), {icon: icon, parallaxZoffset: 0}).addTo(map);
-
-  bastions.B = L.marker(L.latLng(bastionsLocations.B)).addTo(map);
-  icon =  L.divIcon({className: 'parallax-marker label medium b', html: 'Bastion B', iconSize: [200, 36], iconAnchor: [100, 18]});
-  L.parallaxMarker(L.latLng(bastionsLocations.B), {icon: icon, parallaxZoffset: 0}).addTo(map);
+  bastions.A = L.marker(L.latLng(bastionsLocations.A), {icon: bastionsIcon.A}).addTo(map);
+  bastions.B = L.marker(L.latLng(bastionsLocations.B), {icon: bastionsIcon.B}).addTo(map);
 
   /*
     SocketIo interractions
@@ -89,8 +119,12 @@ $(function() {
   var socket = io.connect('http://' + window.location.hostname + ':3000');
 
   socket.on('peon', function (peon) {
-    console.log(peon);
+    console.log('create', peon.name);
+    peons[peon.name] = L.Marker.movingMarker([peon.from, peon.to], [5000], {icon: peonsIcon[peon.owner], autostart: true}).addTo(map);
+    peons[peon.name].on('end', function() {
+      map.removeLayer(peons[peon.name]);
+      console.log('killing', peon.name);
+    });
+    console.log(peons);
   });
-
-
 });

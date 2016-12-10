@@ -56,7 +56,7 @@ function setUp() {
     if (feature.properties.measure_2 === 'bike') {
       type = 'bike';
     } else {
-      type = feature.properties.measure;
+      type = feature.properties.measures;
     }
     switch (type) {
       case 'ped':
@@ -87,7 +87,7 @@ function setUp() {
   });
 
   // 4. moving peons stack
-  movingPeonsStack = _.fill(Array(10), []);
+  movingPeonsStack = _.fill(Array(11), []);
 
   gameReady = true;
   console.log('========= Setup ends.');
@@ -98,7 +98,7 @@ function setUp() {
  **********************************************************************************************************************/
 
 mainLoop = () => {
-  console.log('====== New tick:', stackPointer);
+  console.log('====== New tick:', stackPointer, movingPeonsStack);
   if (!gameReady) {
     console.log('!!!! Game not ready yet!');
     return;
@@ -116,29 +116,26 @@ mainLoop = () => {
     }
     return;
   }
-  return Promise.all(movingPeonsStack[stackPointer])
-    .then(() => {
-      // report ownerships
-      players.A.bases = {};
-      players.B.bases = {};
-      Object.keys(bases).forEach(base => {
-        if (base.owner) {
-          players[base.owner].bases[base.name] = base;
-        }
-      });
+  movingPeonsStack[stackPointer].forEach(currentTask => {
+    currentTask();
+  });
+  // report ownerships
+  players.A.bases = {};
+  players.B.bases = {};
+  Object.keys(bases).forEach(base => {
+    if (base.owner) {
+      players[base.owner].bases[base.name] = base;
+    }
+  });
 
-      // empty the current stack tasks
-      movingPeonsStack[stackPointer] = [];
+  // empty the current stack tasks
+  movingPeonsStack[stackPointer] = [];
 
-      // step up into the stack
-      stackPointer++;
-      if (stackPointer == 11) {
-        stackPointer = 0;
-      }
-    })
-    .catch(e => {
-      console.log ('ERROR main loop:', e, movingPeonsStack[stackPointer], stackPointer, movingPeonsStack);
-    });
+  // step up into the stack
+  stackPointer++;
+  if (stackPointer == 11) {
+    stackPointer = 0;
+  }
 };
 
 setUp();
@@ -229,7 +226,7 @@ router.get('/status/peons/:player/zones/:zone', (req, res, next) => {
 router.get('/status/zones/:player', (req, res, next) => {
   res.json({
     success: true,
-    result: Object.keys(players[req.param('player')])
+    result: Object.keys(players[req.params.player].bases)
   });
 });
 
@@ -263,50 +260,47 @@ router.post('/cmd/send/:player', (req, res, next) => {
     // decrement the peons nb
     for (i = 0; i < nb; i++) {
       player.peons.alive[name] = new businessClasses.Peon(name, player, base);
-      res.io.emit('peon', {name: 'toto'});
-      sp = stackPointer - 1;
-      if (sp < 0) {
-        sp = 10;
+      res.io.emit('peon', player.peons.alive[name].json());
+      sp = stackPointer + 5;
+      if (sp > 10) {
+        sp = sp - 10;
       }
-
       // add the task to the stack
       if (!movingPeonsStack[sp]) {
         movingPeonsStack[sp] = [];
       }
-      movingPeonsStack[sp].push(
-        function() {new Promise(function (resolve) {
-          // - add the peon to the base for the player
-          // - remove a peon from the base for the opposite player
-          if (base.peons[player.name] < 3) {
-            base.peons[player.name]++;
+      movingPeonsStack[sp].push(() => {
+        console.log('===== Sending peon...');
+        // - add the peon to the base for the player
+        // - remove a peon from the base for the opposite player
+        if (base.peons[player.name] < 3) {
+          base.peons[player.name]++;
+        }
+        if (player.name == 'A') {
+          base.peons.B--
+          if (base.peons.B < 0) {
+            base.peons.B = 0
           }
-          if (player.name == 'A') {
-            base.peons.B--
-            if (base.peons.B < 0) {
-              base.peons.B = 0
-            }
-          } else {
-            base.peons.A--;
-            if (base.peons.A < 0) {
-              base.peons.A = 0
-            }
+        } else {
+          base.peons.A--;
+          if (base.peons.A < 0) {
+            base.peons.A = 0
           }
+        }
+        console.log('-------------- base', base.name,base.peons);
+        // - kill the peon
+        delete player.peons.alive[name];
 
-          // - kill the peon
-          delete player.peons.alive[name];
+        // - compute ownership
+        if (base.peons.A === 3) {
+          base.owner = players.A;
+        }
+        if (base.peons.B === 3) {
+          base.owner = players.B;
+        }
 
-          // - compute ownership
-          if (base.peons.A === 3) {
-            base.owner = players.A;
-          }
-          if (base.peons.B === 3) {
-            base.owner = players.B;
-          }
-          // todo send feedback to the front via websocket
-
-          resolve(true);
-        })}
-      );
+        return true;
+      });
     }
     res.json({
       success: true,

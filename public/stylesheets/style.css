@@ -60,7 +60,8 @@ html, body, #map {
   font-weight: bold;
   color: #000;
   text-transform: uppercase;
-  text-shadow: black 1px 0 1px, black -1px 0 1px, black 0 -1px 1px, black 0 1px 1px; }
+  text-shadow: black 1px 0 1px, black -1px 0 1px, black 0 -1px 1px, black 0 1px 1px;
+  z-index: 6000 !important; }
 
 .parallax-marker.label.huge {
   font-size: 96px;
@@ -73,8 +74,7 @@ html, body, #map {
 .parallax-marker.label.medium {
   font-size: 16px;
   color: #79557d;
-  font-weight: bold;
-  z-index: 9999 !important; }
+  font-weight: bold; }
 
 .parallax-marker.label.a {
   color: #ff0000 !important;
@@ -89,5 +89,8 @@ html, body, #map {
   text-transform: none;
   font-weight: normal;
   color: #fff; }
+
+.peon {
+  z-index: 5000 !important; }
 
 /*# sourceMappingURL=style.css.map */

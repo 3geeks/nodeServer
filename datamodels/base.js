@@ -1,6 +1,7 @@
 var
   geolib = require('geolib'),
-  utils = require('../utils');
+  utils = require('../utils'),
+  Promise = require('bluebird');
 
 function Base (name, players, geometry, sensors) {
   this.players = players;
@@ -16,37 +17,28 @@ function Base (name, players, geometry, sensors) {
   this.center = geolib.getCenter(utils.toPolygon(geometry));
 }
 
-Base.prototype.setPeons = function setPeons(nb, player) {
-  this.peons[player] += nb;
-  if (player == A) {
-    this.peons.B -= nb;
-  } else {
-    this.peons.A -= nb;
-  }
-  return this;
-};
-
-Base.prototype.checkOwner = function checkOwner(nb, player) {
-  Object.keys(this.peons).forEach(player => {
-    if (this.peons >= 4) {
-      this.owner = this.player[player];
-    }
-    return this;
-  });
-};
-
 Base.prototype.harvestEnergy = function giveEnergy () {
+  var promises = [];
   if (this.owner !== null) {
     this.sensors.forEach(sensor => {
-      this.energy += sensor.harvest()
+      promises.push(() => {
+        console.log('----------------- harvesting starting');
+        sensor.harvest()
+          .then(energy => {
+            console.log('------------- energy', energy);
+            this.energy += energy;
+          });
+      });
     });
-
-    this.owner.giveEnergy(this.energy);
-    this.energy = 0;
+    Promise.all(promises)
+      .then(() => {
+        console.log('===== Give', this.energy, 'energy to', this.owner.name);
+        this.owner.giveEnergy(this.energy);
+        this.energy = 0;
+      });
   } else {
     this.energy = 0;
   }
-  return this;
 };
 
 module.exports = Base;

@@ -9,7 +9,7 @@
     env_production : {
       "NODE_ENV": "production"
     },
-    "ignore_watch" : ["node_modules", "public", ".idea", ".gitignore", "README.md"],
+    "ignore_watch" : ["node_modules", "public/stylesheets", ".idea", ".gitignore", "README.md", ".git"],
     "watch_options": {
       "followSymlinks": false
     }
