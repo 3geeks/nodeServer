@@ -85,7 +85,7 @@ function setUp() {
   zonesGJ.features.forEach(feature => {
     var name, geometry, baseSensors=[];
     name = feature.properties.name.toLowerCase();
-    console.log(name);
+    console.log('integrating base',name);
 
     geometry = feature.geometry.coordinates;
 
