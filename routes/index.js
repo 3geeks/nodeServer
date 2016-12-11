@@ -319,7 +319,7 @@ router.post('/cmd/send/:player', (req, res, next) => {
   //{"nb":5,"zone":"2"}
   var player, nb, base, i, name, sp;
 
-  if (bases[bases[req.body.zone]] === undefined) {
+  if (bases[req.body.zone] === undefined) {
     res.json({
       status: false,
       message: 'La base ' + req.body.zone + ' n\'existe pas...'
