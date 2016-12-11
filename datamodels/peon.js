@@ -8,9 +8,9 @@ function Peon(name, player, toBase) {
 
   this.owner = player;
   this.name = name;
-  this.currentPos = player.bastion.coordinates;
+  this.currentPos = [player.bastion.coordinates[0] + (Math.random() / 3000), player.bastion.coordinates[1] + (Math.random() / 3000)];
   this.headingBase = toBase;
-  this.headincCoordinates = toBase.center;
+  this.headincCoordinates = {latitude: toBase.center.latitude + (Math.random() / 3000), longitude: toBase.center.longitude + (Math.random() / 3000)};
   console.log('==== Peon', name, 'owned by', player.name, 'created.');
 }
 
