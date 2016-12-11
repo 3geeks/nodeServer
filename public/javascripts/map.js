@@ -56,7 +56,8 @@ var
   },
   colors = {
     A: '#00f',
-    B: '#f00'
+    B: '#f00',
+    O: '#aafaa8'
   },
   clientUUID = '',
   me = '',
@@ -114,7 +115,7 @@ $(function() {
         coords[0].push(point);
       });
 
-      zones[feature.properties.name.toLowerCase()] = L.polygon(coords, {
+      zones[feature.properties.name.toLowerCase().replace("'",'').replace('é','e').replace('ô', 'o')] = L.polygon(coords, {
         //dashArray: '4,2',
         weight: 1,
         color: color,
@@ -123,8 +124,20 @@ $(function() {
         fillOpacity: fillOpacity
       }).addTo(map);
 
-      center = zones[feature.properties.name.toLowerCase()].getBounds().getCenter();
+      center = zones[feature.properties.name.toLowerCase().replace("'",'').replace('é','e').replace('ô', 'o')].getBounds().getCenter();
       L.parallaxMarker(center, {icon: icon, parallaxZoffset: 0.2}).addTo(map);
+    });
+    $.getJSON('http://' + window.location.hostname + ':3000/isstarted', function(data) {
+      if (data.gameStarted) {
+        Object.keys(data.bases).forEach(function(basename) {
+          zones[basename].setStyle({
+            fillColor: colors[data.bases[basename]],
+            color: colors[data.bases[basename]]
+          });
+        });
+        start = true;
+        hideWelcome();
+      }
     });
   });
 
@@ -141,13 +154,6 @@ $(function() {
       start = true;
       hideWelcome();
     });
-  });
-
-  $.getJSON('http://' + window.location.hostname + ':3000/isstarted', function(data) {
-    if (data.gameStarted) {
-      start = true;
-      hideWelcome();
-    }
   });
 
   socket.on('start', function() {
@@ -182,10 +188,12 @@ $(function() {
       .css('color', colors[player]);
   });
 
-  socket.on('base', function(data) {
-    zones[data.name].setStyle({
-      fillColor: colors[data.owner],
-      color: colors[data.owner]
+  socket.on('bases', function(data) {
+    Object.keys(zones).forEach(function(basename) {
+      zones[basename].setStyle({
+        fillColor: colors[data[basename]],
+        color: colors[data[basename]]
+      });
     });
   });
 

@@ -84,7 +84,7 @@ function setUp() {
   // 3. bases
   zonesGJ.features.forEach(feature => {
     var name, geometry, baseSensors=[];
-    name = feature.properties.name.toLowerCase();
+    name = feature.properties.name.toLowerCase().replace("'",'').replace('é','e').replace('ô', 'o');
     console.log('integrating base',name);
 
     geometry = feature.geometry.coordinates;
@@ -240,8 +240,13 @@ router.get('/start', (req, res, next) => {
 });
 
 router.get('/isstarted', (req, res, next) => {
+  var b = {};
+  Object.keys(bases).forEach(bb => {
+    b[bb] = (bases[bb].owner) ? bases[bb].owner.name : 'O';
+  });
   res.json({
-    gameStarted: gameStarted
+    gameStarted: gameStarted,
+    bases: b
   });
 });
 
@@ -386,10 +391,12 @@ router.post('/cmd/send/:player', (req, res, next) => {
           console.log('-------------- base', base.name,'remportée par A !!!!!!!!');
           message ='Le joueur A vient de remporter la zone ' + base.name + ' !';
 
-          res.io.emit('base', {
-            name: base.name,
-            owner: base.owner.name
+          var b = {};
+          Object.keys(bases).forEach(bb => {
+            b[bb] = (bases[bb].owner) ? bases[bb].owner.name : 'O';
           });
+
+          res.io.emit('bases', b);
 
           console.log('______________________________________________________',oldOwner);
 
@@ -412,10 +419,12 @@ router.post('/cmd/send/:player', (req, res, next) => {
           console.log('-------------- base', base.name,'remportée par',base.owner,'!!!!!!!!');
           message ='Le joueur B vient de remporter la zone ' + base.name + ' !';
 
-          res.io.emit('base', {
-            name: base.name,
-            owner: base.owner.name
+          var b = {};
+          Object.keys(bases).forEach(bb => {
+            b[bb] = (bases[bb].owner) ? bases[bb].owner.name : 'O';
           });
+
+          res.io.emit('bases', b);
 
           if (oldOwner) {
             message = 'Le joueur B a repris la zone ' + base.name + ' au joueur A !';
