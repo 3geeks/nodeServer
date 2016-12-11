@@ -22,7 +22,7 @@ Base.prototype.harvestEnergy = function giveEnergy () {
       sensor.harvest()
         .then(energy => {
           console.log('===== Give', energy, 'energy to', this.owner.name, 'from sensor', sensor.name);
-          this.owner.giveEnergy(energy);
+          this.owner.giveEnergy(energy / 1000);
         });
     });
   }

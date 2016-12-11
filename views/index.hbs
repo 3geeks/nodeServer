@@ -9,31 +9,29 @@
     <link rel="stylesheet"  href="stylesheets/pascal.css">
 </head>
 <body>
-<div id="map"></div>
+    <div id="map"></div>
 
+    <div class="dark"></div>
 
-<div class="dark"></div>
+    <div class="logo_container">
+        <div class="logo"><img src="images/logo-start.png"></div>
+    </div>
 
-<div class="logo_container">
-    <div class="logo"><img src="images/logo-start.png"></div>
-</div>
+    <div class="jauge_container playerA">
+        <div id="agauge" class="jauge_value" style="width:0%"></div>
+    </div>
 
-<div class="jauge_container playerA">
-    <div class="jauge_value" style="width:10%"></div>
-</div>
+    <div class="jauge_container playerB">
+        <div id="bgauge" class="jauge_value" style="width:0%"></div>
+    </div>
 
-<div class="jauge_container playerB">
-    <div class="jauge_value" style="width:10%"></div>
-</div>
-
-<script src="/socket.io/socket.io.js"></script>
-<script src="vendor/leaflet/dist/leaflet.js"></script>
-<script src="vendor/Leaflet.label/dist/leaflet.label.js"></script>
-<script src="vendor/leaflet.parallax.marker/lib.js"></script>
-<script src="vendor/Leaflet.MovingMarker/MovingMarker.js"></script>
-<script src="vendor/jquery/dist/jquery.min.js"></script>
-<script src="javascripts/map.js"></script>
-<script src="javascripts/pascal.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="vendor/leaflet/dist/leaflet.js"></script>
+    <script src="vendor/Leaflet.label/dist/leaflet.label.js"></script>
+    <script src="vendor/leaflet.parallax.marker/lib.js"></script>
+    <script src="vendor/Leaflet.MovingMarker/MovingMarker.js"></script>
+    <script src="vendor/jquery/dist/jquery.min.js"></script>
+    <script src="javascripts/map.js"></script>
 </body>
 </html>
 

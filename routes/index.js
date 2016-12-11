@@ -25,7 +25,8 @@ var
   mainLoop,                                 // the main loop function
   mainLoopTimer,                            // setInterval object
   stackPointer = 0,                         // the pointer to the stack
-  movingPeonsStack = [];                    // the moving peons stack
+  movingPeonsStack = [],                    // the moving peons stack
+  io;
 
 /**********************************************************************************************************************
   Business objects init
@@ -106,6 +107,10 @@ mainLoop = () => {
   // harvest
   Object.keys(bases).forEach(baseName => {
     bases[baseName].harvestEnergy();
+    io.emit('energy', {
+      A: players.A.energy,
+      B: players.B.energy
+    });
   });
 
   // move peons
@@ -155,6 +160,7 @@ router.all('/ciscohackathon/meraki', (req, res, next) => {
   Display the game board
  */
 router.get('/', (req, res, next) => {
+  io = res.io;
   if (!gameReady) {
     console.log('Game not ready yet!');
     res.redirect('/reset');
@@ -252,7 +258,7 @@ router.get('/status/zones', (req, res, next) => {
   });
 });
 
-// envoyer des péons de :player (implémenté, manque websocket)
+// envoyer des péons de :player (implémenté)
 router.post('/cmd/send/:player', (req, res, next) => {
   //{"nb":5,"zone":"2"}
   var player, nb, base, i, name, sp;
@@ -325,8 +331,8 @@ router.post('/cmd/send/:player', (req, res, next) => {
 // créer des péons de :player (implémenté)
 router.post('/cmd/create/:player', (req, res, next) => {
   //{"nb":5}
-  var player = players[req.param('player')];
-  if (players.createPeon(req.param('nb'))) {
+  var player = players[req.params.player];
+  if (player.createPeon(req.body.nb)) {
     res.json({
       success: true,
       total: player.peons.toCreate

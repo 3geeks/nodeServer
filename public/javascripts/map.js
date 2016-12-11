@@ -146,6 +146,11 @@ $(function() {
     });
     console.log(peons);
   });
+  socket.on('energy', function(energy) {
+    console.log('energy', energy,(energy.A / 10000));
+    $('#agauge').css('width', energy.A + '%');
+    $('#bgauge').css('width', energy.B + '%');
+  });
 
   socket.on(clientUUID, function(data) {
 
