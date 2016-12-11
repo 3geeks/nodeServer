@@ -163,6 +163,16 @@ $(function() {
     }
   });
 
+  socket.on('stop', function(){
+    $('.dark').removeClass('off');
+    $('.logo').removeClass('off');
+    $('#winner')
+      .removeClass('off')
+      .html('La partie est terminée...')
+      .css('color', colors.O);
+
+  });
+
   socket.on('peon', function (peon) {
     console.log('create', peon.name);
     peons[peon.name] = L.Marker.movingMarker([peon.from, peon.to], [5000], {icon: peonsIcon[peon.owner], autostart: true}).addTo(map);
@@ -184,7 +194,7 @@ $(function() {
     $('.logo').removeClass('off');
     $('#winner')
       .removeClass('off')
-      .html('Joueur' + player +'<br>gagne la partie !')
+      .html('Joueur ' + player +'<br>gagne la partie !')
       .css('color', colors[player]);
   });
 

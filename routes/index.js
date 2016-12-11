@@ -103,6 +103,8 @@ function setUp() {
   winner = false;
   gameReady = true;
   console.log('========= Setup ends.');
+  console.log('========= Start the loop.');
+  mainLoopTimer = setInterval(mainLoop, 1 * 1000);
 }
 
 /**********************************************************************************************************************
@@ -148,12 +150,15 @@ mainLoop = () => {
     B: players.B.energy
   });
 
-  if (players.A.energy >= 100) {
+  if (players.A.energy >= 100 || players.B.energy >= 100) {
     gameStarted = false;
+    gameReady = false;
+    clearTimeout(mainLoopTimer);
+  }
+  if (players.A.energy >= 100) {
     winner = players.A;
   }
   if (players.B.energy >= 100) {
-    gameStarted = false;
     winner = players.B;
   }
   if (winner) {
@@ -179,7 +184,6 @@ mainLoop = () => {
 };
 
 setUp();
-mainLoopTimer = setInterval(mainLoop, 1 * 1000);
 
 /**********************************************************************************************************************
   Routes definitions
@@ -252,6 +256,8 @@ router.get('/isstarted', (req, res, next) => {
 
 router.get('/stop', (req, res, next) => {
   gameStarted = false;
+  gameReady = false;
+  setUp();
   request.post('/AutoFlow/TasksManager/rest/NodeJSWebHooks', {
     setup_name: 'CiscoPhilipsHue',
     fields: {
@@ -259,8 +265,10 @@ router.get('/stop', (req, res, next) => {
       turn: 'off'
     }
   });
-
-  res.redirect('/reset');
+  io.emit('stop', {});
+  res.json({
+    status: true
+  });
 });
 
 // scores
