@@ -5,8 +5,8 @@ var
   fs = require('fs'),                       // use the filesystem
   _ = require('lodash'),
   utils = require('../utils'),
-  request = require('request'),
-
+  rj = require('request-json'),
+  request = rj.createClient('http://109.202.107.147:20808/'),
   businessClasses = require('../datamodels'), // all the data models
   zonesGJ = require('../public/data/zones.json'), // all the zones
   sensorsGJ = require('../public/data/sensors.json'), // the sensors
@@ -92,7 +92,6 @@ function setUp() {
         baseSensors.push(sensor);
       }
     });
-    console.log('************************** baseSensors for', name, baseSensors);
     bases[name] = new businessClasses.Base(name, players, geometry, baseSensors);
   });
 
@@ -142,10 +141,6 @@ mainLoop = () => {
   });
 
   // send scores
-  console.log ('Scores', {
-    A: players.A.energy,
-    B: players.B.energy
-  });
   io.emit('energy', {
     A: players.A.energy,
     B: players.B.energy
@@ -161,7 +156,7 @@ mainLoop = () => {
   }
   if (winner) {
     io.emit('winner', winner.name);
-    request.post(provizionOptions).form({
+    request.post('/AutoFlow/TasksManager/rest/NodeJSWebHooks', {
       setup_name: 'CiscoPhilipsHue',
       fields: {
         message: 'Le joueur ' + winner.name + ' a gagné',
@@ -198,7 +193,6 @@ router.all('/ciscohackathon/meraki', (req, res, next) => {
  */
 router.get('/', (req, res, next) => {
   io = res.io;
-  console.log('io', io)
   if (!gameReady) {
     console.log('Game not ready yet!');
     res.redirect('/reset');
@@ -227,7 +221,7 @@ router.get('/reset', (req, res, next) => {
 router.get('/start', (req, res, next) => {
   gameStarted = true;
 
-  request.post(provizionOptions).form({
+  request.post('/AutoFlow/TasksManager/rest/NodeJSWebHooks', {
     setup_name: 'CiscoPhilipsHue',
     fields: {
       message: 'La partie commence!',
@@ -243,7 +237,7 @@ router.get('/start', (req, res, next) => {
 
 router.get('/stop', (req, res, next) => {
   gameStarted = false;
-  request.post(provizionOptions).form({
+  request.post('/AutoFlow/TasksManager/rest/NodeJSWebHooks', {
     setup_name: 'CiscoPhilipsHue',
     fields: {
       message: 'La partie a été arrétée.',
@@ -344,15 +338,14 @@ router.post('/cmd/send/:player', (req, res, next) => {
         movingPeonsStack[sp] = [];
       }
       movingPeonsStack[sp].push(() => {
-        var oldOwner;
-        console.log('===== Sending peon...');
+        var oldOwner, message;
         // - add the peon to the base for the player
         // - remove a peon from the base for the opposite player
         if (base.peons[player.name] < 3) {
           base.peons[player.name]++;
         }
         if (player.name == 'A') {
-          base.peons.B--
+          base.peons.B--;
           if (base.peons.B < 0) {
             base.peons.B = 0
           }
@@ -362,46 +355,45 @@ router.post('/cmd/send/:player', (req, res, next) => {
             base.peons.A = 0
           }
         }
-        console.log('-------------- base', base.name,base.peons);
         // - kill the peon
         delete player.peons.alive[name];
 
         // - compute ownership
         if (base.peons.A === 3) {
+          console.log('______________________________________________________',base.owner);
           oldOwner = base.owner;
           base.owner = players.A;
+          if (oldOwner === base.owner) {
+            return;
+          }
           console.log('-------------- base', base.name,'remportée par A !!!!!!!!');
-          request.post(provizionOptions).form({
-            setup_name: 'CiscoAlerts',
-            fields: {
-              message: 'Le joueur A vient de gagner la zone "' + base.name + '" !'
-            }
-          });
+          message ='Le joueur A vient de remporter la zone ' + base.name + ' !';
 
           res.io.emit('base', {
             name: base.name,
             owner: base.owner.name
           });
 
+          console.log('______________________________________________________',oldOwner);
+
           if (oldOwner) {
-            request.post(provizionOptions).form({
-              setup_name: 'CiscoAlerts',
-              fields: {
-                message: 'Le joueur B vient de perdre la zone "' + base.name + '" !'
-              }
-            });
+            message = 'Le joueur A a repris la zone ' + base.name + ' au joueur B !';
           }
+          request.post('/AutoFlow/TasksManager/rest/NodeJSWebHooks', {
+            setup_name: 'CiscoAlerts',
+            fields: {
+              message: message
+            }
+          });
         }
         if (base.peons.B === 3) {
           oldOwner = base.owner;
           base.owner = players.B;
+          if (oldOwner === base.owner) {
+            return;
+          }
           console.log('-------------- base', base.name,'remportée par',base.owner,'!!!!!!!!');
-          request.post(provizionOptions).form({
-            setup_name: 'CiscoAlerts',
-            fields: {
-              message: 'Le joueur B vient de gagner la zone "' + base.name + '" !'
-            }
-          });
+          message ='Le joueur B vient de remporter la zone ' + base.name + ' !';
 
           res.io.emit('base', {
             name: base.name,
@@ -409,13 +401,14 @@ router.post('/cmd/send/:player', (req, res, next) => {
           });
 
           if (oldOwner) {
-            request.post(provizionOptions).form({
-              setup_name: 'CiscoAlerts',
-              fields: {
-                message: 'Le joueur A vient de perdre la zone "' + base.name + '" !'
-              }
-            });
+            message = 'Le joueur B a repris la zone ' + base.name + ' au joueur A !';
           }
+          request.post('/AutoFlow/TasksManager/rest/NodeJSWebHooks', {
+            setup_name: 'CiscoAlerts',
+            fields: {
+              message: message
+            }
+          });
         }
 
         return true;
@@ -437,7 +430,7 @@ router.post('/cmd/send/:player', (req, res, next) => {
 router.post('/cmd/create/:player', (req, res, next) => {
   //{"nb":5}
   var player = players[req.params.player];
-  if (player.createPeon(parInt(req.body.nb))) {
+  if (player.createPeon(parseInt(req.body.nb))) {
     res.json({
       success: true,
       total: player.peons.toCreate

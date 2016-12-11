@@ -19,6 +19,7 @@
     "node-uuid": "^1.4.7",
     "person-generator": "^1.0.1",
     "request": "^2.79.0",
+    "request-json": "^0.6.1",
     "request-promise": "^4.1.1",
     "sails-disk": "^0.10.10",
     "sails-memory": "^0.10.7",
