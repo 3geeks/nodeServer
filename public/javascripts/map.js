@@ -149,7 +149,7 @@ $(function() {
       hideWelcome();
     }
   });
-});
+
   socket.on('start', function() {
     if (!start) {
       start = true;
