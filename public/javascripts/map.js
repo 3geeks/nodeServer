@@ -122,7 +122,7 @@ $(function() {
         fillOpacity: fillOpacity
       }).addTo(map);
 
-      center = zones[feature.properties.name].getBounds().getCenter();
+      center = zones[feature.properties.name.toLowerCase()].getBounds().getCenter();
       L.parallaxMarker(center, {icon: icon, parallaxZoffset: 0.2}).addTo(map);
     });
   });

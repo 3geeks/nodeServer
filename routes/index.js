@@ -85,6 +85,8 @@ function setUp() {
   zonesGJ.features.forEach(feature => {
     var name, geometry, baseSensors=[];
     name = feature.properties.name.toLowerCase();
+    console.log(name);
+
     geometry = feature.geometry.coordinates;
 
     sensors.forEach(sensor => {
