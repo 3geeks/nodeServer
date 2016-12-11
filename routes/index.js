@@ -232,6 +232,8 @@ router.get('/start', (req, res, next) => {
     }
   });
 
+  io.emit('start', {});
+  
   res.json({
     status: true,
   });

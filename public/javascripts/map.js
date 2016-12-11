@@ -60,6 +60,7 @@ var
   },
   clientUUID = '',
   me = '',
+  start = false,
   mapLink = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
     //'<a href="http://carto.com/basemaps">Map tiles by Carto, under CC BY 3.0. Data by OpenStreetMap, under ODbL</a>';
     //'<a href="http://maps.stamen.com/#watercolor/">Map tiles by Stamen</a>. <a href="http://openstreetmap.org">Data by OpenStreetMap, under ODbL</a>';
@@ -137,8 +138,16 @@ $(function() {
 
   $('.logo').on('click', function() {
     $.get('http://' + window.location.hostname + ':3000/start', function() {
+      start = true;
       hideWelcome();
     });
+  });
+
+  socket.on('start', function() {
+    if (!start) {
+      start = true;
+      hideWelcome();
+    }
   });
 
   socket.on('peon', function (peon) {
