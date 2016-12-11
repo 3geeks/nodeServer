@@ -233,9 +233,15 @@ router.get('/start', (req, res, next) => {
   });
 
   io.emit('start', {});
-  
+
   res.json({
     status: true,
+  });
+});
+
+outer.get('/isstarted', (req, res, next) => {
+  res.json({
+    gameStarted: gameStarted
   });
 });
 

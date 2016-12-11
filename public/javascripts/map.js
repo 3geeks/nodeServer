@@ -143,6 +143,13 @@ $(function() {
     });
   });
 
+  $.json('http://' + window.location.hostname + ':3000/isstarted', function(data) {
+    if (data.gameStarted) {
+      start = true;
+      hideWelcome();
+    }
+  });
+});
   socket.on('start', function() {
     if (!start) {
       start = true;
