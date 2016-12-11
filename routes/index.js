@@ -107,6 +107,17 @@ function setUp() {
   mainLoopTimer = setInterval(mainLoop, 1 * 1000);
 }
 
+function refuseIfNotStartedOrReady(req, res, next) {
+  if (!gameReady || !gameStarted) {
+    res.json({
+      success: false,
+      message: 'La partie n\'est pas encore démarrée !'
+    });
+  } else {
+    next();
+  }
+}
+
 /**********************************************************************************************************************
  Loops
  **********************************************************************************************************************/
@@ -193,6 +204,11 @@ setUp();
 router.all('/ciscohackathon/meraki', (req, res, next) => {
   console.log('Meraki recieved', req.params);
 });
+router.all('/cmd/*', refuseIfNotStartedOrReady);
+router.all('/status/*', refuseIfNotStartedOrReady);
+router.all('/scores/*', refuseIfNotStartedOrReady);
+router.all('/reset', refuseIfNotStartedOrReady);
+router.all('/stop', refuseIfNotStartedOrReady);
 
 /*
   Display the game board
