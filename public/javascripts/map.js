@@ -1,4 +1,5 @@
 var
+  socket = io.connect('http://' + window.location.hostname + ':3000'),
   zones = {},
   map,
   bounds = [
@@ -53,9 +54,22 @@ var
       popupAnchor: [39, 0]
     })
   },
+  clientUUID = '',
+  me = '',
   mapLink = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
     //'<a href="http://carto.com/basemaps">Map tiles by Carto, under CC BY 3.0. Data by OpenStreetMap, under ODbL</a>';
     //'<a href="http://maps.stamen.com/#watercolor/">Map tiles by Stamen</a>. <a href="http://openstreetmap.org">Data by OpenStreetMap, under ODbL</a>';
+
+function generateUUID() {
+  var d = new Date().getTime();
+  var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = (d + Math.random()*16)%16 | 0;
+    d = Math.floor(d/16);
+    return (c=='x' ? r : (r&0x3|0x8)).toString(16);
+  });
+  return uuid;
+}
+clientUUID = generateUUID();
 
 $(function() {
   map = L.map('map', {
@@ -112,11 +126,16 @@ $(function() {
   bastions.A = L.marker(L.latLng(bastionsLocations.A), {icon: bastionsIcon.A}).addTo(map);
   bastions.B = L.marker(L.latLng(bastionsLocations.B), {icon: bastionsIcon.B}).addTo(map);
 
-  /*
-    SocketIo interractions
-   */
+  function hideWelcome () {
+    $('.dark').addClass('off');
+    $('.logo').addClass('off');
+  }
 
-  var socket = io.connect('http://' + window.location.hostname + ':3000');
+  $(".logo").on("click",function() {
+    hideWelcome();
+    var players = ['A', 'B'];
+    socket.emit('start', {player: players[Math.round(Math.random())]});
+  });
 
   socket.on('peon', function (peon) {
     console.log('create', peon.name);
@@ -126,5 +145,9 @@ $(function() {
       console.log('killing', peon.name);
     });
     console.log(peons);
+  });
+
+  socket.on(clientUUID, function(data) {
+
   });
 });

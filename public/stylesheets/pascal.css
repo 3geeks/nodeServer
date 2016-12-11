@@ -43,6 +43,7 @@
 	width:200px;
 	height:30px;
 	opacity:0.8;
+	overflow: hidden;
 }
 
 .jauge_value {
@@ -57,7 +58,7 @@
 
 .playerA .jauge_value {
 	background-color:#3744c1;
-	border-radius:5px;	
+	border-radius:0;
 	height:100%;
 }
 .playerB {
@@ -66,6 +67,6 @@
 
 .playerB .jauge_value {
 	background-color:#ff2424;
-	border-radius:5px;	
+	border-radius:0;
 	height:100%;
 }

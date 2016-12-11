@@ -180,6 +180,14 @@ router.get('/reset', (req, res, next) => {
   res.redirect('/');
 });
 
+router.get('/start/:player', (req, res, next) => {
+  res.json({
+    status: true,
+    A: players.A.energy,
+    B: players.B.energy
+  });
+});
+
 // scores
 router.get('/scores', (req, res, next) => {
   res.json({
@@ -306,8 +314,12 @@ router.post('/cmd/send/:player', (req, res, next) => {
       success: true,
       total: player.peons.toCreate
     });
-
+    return true;
   }
+  res.json({
+    success: false,
+    message: 'Désolé, tu n\'as plus de péons...'
+  });
 });
 
 // créer des péons de :player (implémenté)
