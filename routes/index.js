@@ -318,7 +318,7 @@ router.post('/cmd/send/:player', (req, res, next) => {
   }
   res.json({
     success: false,
-    message: 'Désolé, tu n\'as plus de péons...'
+    message: 'Désolé, tu n\'as pas assez de péons...'
   });
 });
 
