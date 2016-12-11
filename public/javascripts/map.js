@@ -143,7 +143,7 @@ $(function() {
     });
   });
 
-  $.json('http://' + window.location.hostname + ':3000/isstarted', function(data) {
+  $.getJSON('http://' + window.location.hostname + ':3000/isstarted', function(data) {
     if (data.gameStarted) {
       start = true;
       hideWelcome();
