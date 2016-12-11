@@ -70,3 +70,18 @@
 	border-radius:0;
 	height:100%;
 }
+
+.leaflet-tile{
+    filter: gray; /* IE6-9 */
+    filter: grayscale(1); /* Microsoft Edge and Firefox 35+ */
+    -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
+}
+#winner {
+
+    width: 100%;
+    font-size: 69px;
+    text-align: center;
+    margin-top: 30px;
+    color: red;
+    text-shadow: rgb(0, 0, 0) 4px 4px 4px;
+}

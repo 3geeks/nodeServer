@@ -26,7 +26,8 @@ var
   mainLoopTimer,                            // setInterval object
   stackPointer = 0,                         // the pointer to the stack
   movingPeonsStack = [],                    // the moving peons stack
-  io;
+  io,
+  winner;
 
 /**********************************************************************************************************************
   Business objects init
@@ -78,18 +79,20 @@ function setUp() {
     var name, geometry, baseSensors=[];
     name = feature.properties.name;
     geometry = feature.geometry.coordinates;
+
     sensors.forEach(sensor => {
       if (sensor.isIn(geometry)) {
         baseSensors.push(sensor);
       }
     });
-
+    console.log('************************** baseSensors for', name, baseSensors);
     bases[name] = new businessClasses.Base(name, players, geometry, baseSensors);
   });
 
   // 4. moving peons stack
   movingPeonsStack = _.fill(Array(11), []);
 
+  winner = false;
   gameReady = true;
   console.log('========= Setup ends.');
 }
@@ -100,18 +103,10 @@ function setUp() {
 
 mainLoop = () => {
   console.log('====== New tick:', stackPointer, movingPeonsStack);
-  if (!gameReady) {
-    console.log('!!!! Game not ready yet!');
+  if (!gameReady | !gameStarted) {
+    console.log('!!!! Game not ready/started yet!');
     return;
   }
-  // harvest
-  Object.keys(bases).forEach(baseName => {
-    bases[baseName].harvestEnergy();
-    io.emit('energy', {
-      A: players.A.energy,
-      B: players.B.energy
-    });
-  });
 
   // move peons
   if (!movingPeonsStack[stackPointer]) {
@@ -124,6 +119,7 @@ mainLoop = () => {
   movingPeonsStack[stackPointer].forEach(currentTask => {
     currentTask();
   });
+
   // report ownerships
   players.A.bases = {};
   players.B.bases = {};
@@ -133,6 +129,34 @@ mainLoop = () => {
     }
   });
 
+  // harvest
+  Object.keys(bases).forEach(baseName => {
+    bases[baseName].harvestEnergy();
+  });
+
+  // send scores
+  console.log ('Scores', {
+    A: players.A.energy,
+    B: players.B.energy
+  });
+  io.emit('energy', {
+    A: players.A.energy,
+    B: players.B.energy
+  });
+
+  if (players.A.energy >= 100) {
+    gameStarted = false;
+    winner = players.A;
+  }
+  if (players.B.energy >= 100) {
+    gameStarted = false;
+    winner = players.B;
+  }
+  if (winner) {
+    io.emit('winner', winner.name);
+    //todo le dire à provision
+    setUp();
+  }
   // empty the current stack tasks
   movingPeonsStack[stackPointer] = [];
 
@@ -144,7 +168,6 @@ mainLoop = () => {
 };
 
 setUp();
-
 mainLoopTimer = setInterval(mainLoop, 1 * 1000);
 
 /**********************************************************************************************************************
@@ -161,6 +184,7 @@ router.all('/ciscohackathon/meraki', (req, res, next) => {
  */
 router.get('/', (req, res, next) => {
   io = res.io;
+  console.log('io', io)
   if (!gameReady) {
     console.log('Game not ready yet!');
     res.redirect('/reset');
@@ -188,15 +212,16 @@ router.get('/reset', (req, res, next) => {
 
 router.get('/start', (req, res, next) => {
   gameStarted = true;
+
+  // todo le dire à Provision
   res.json({
     status: true,
-    A: players.A.energy,
-    B: players.B.energy
   });
 });
 
 router.get('/stop', (req, res, next) => {
   gameStarted = false;
+  // todo le dire à Provision
   res.redirect('/reset');
 });
 
@@ -234,8 +259,8 @@ router.get('/status/score/:player', (req, res, next) => {
 // combien de péons dans :zone pour :player (implémenté)
 router.get('/status/peons/:player/zones/:zone', (req, res, next) => {
   var
-    base = bases[req.param('zone')],
-    player = req.param('player');
+    base = bases[req.params.zone],
+    player = req.params.player;
   res.json({
     success: true,
     result: base.peons[player]
@@ -314,9 +339,11 @@ router.post('/cmd/send/:player', (req, res, next) => {
         // - compute ownership
         if (base.peons.A === 3) {
           base.owner = players.A;
+          console.log('-------------- base', base.name,'remportée par A !!!!!!!!');
         }
         if (base.peons.B === 3) {
           base.owner = players.B;
+          console.log('-------------- base', base.name,'remportée par',base.owner,'!!!!!!!!');
         }
 
         return true;

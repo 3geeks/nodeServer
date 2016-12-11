@@ -18,7 +18,9 @@ function Base (name, players, geometry, sensors) {
 
 Base.prototype.harvestEnergy = function giveEnergy () {
   if (this.owner !== null) {
+    console.log('base', this.name, 'is owned by', this.owner.name, 'start harvesting...', this.sensors);
     this.sensors.forEach(sensor => {
+      console.log('harvesting sensor', sensor.name);
       sensor.harvest()
         .then(energy => {
           console.log('===== Give', energy, 'energy to', this.owner.name, 'from sensor', sensor.name);

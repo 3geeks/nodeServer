@@ -22,7 +22,7 @@ var
   peons = {},
   peonsIcon = {
     A: L.icon({
-      iconUrl: './images/player-B.png',
+      iconUrl: './images/player-A.png',
 
       iconSize: [10, 10],
       iconAnchor: [5, 5],
@@ -30,7 +30,7 @@ var
       className: 'peon'
     }),
     B: L.icon({
-      iconUrl: './images/player-A.png',
+      iconUrl: './images/player-B.png',
 
       iconSize: [10, 10],
       iconAnchor: [5, 5],
@@ -40,19 +40,23 @@ var
   },
   bastionsIcon = {
     A: L.icon({
-      iconUrl: './images/bastion-B.png',
+      iconUrl: './images/bastion-A.png',
 
       iconSize: [78, 79],
       iconAnchor: [39, 39],
       popupAnchor: [39, 0]
     }),
     B: L.icon({
-      iconUrl: './images/bastion-A.png',
+      iconUrl: './images/bastion-B.png',
 
       iconSize: [78, 79],
       iconAnchor: [39, 39],
       popupAnchor: [39, 0]
     })
+  },
+  colors = {
+    A: '#00f',
+    B: '#f00'
   },
   clientUUID = '',
   me = '',
@@ -131,10 +135,10 @@ $(function() {
     $('.logo').addClass('off');
   }
 
-  $(".logo").on("click",function() {
-    hideWelcome();
-    var players = ['A', 'B'];
-    socket.emit('start', {player: players[Math.round(Math.random())]});
+  $('.logo').on('click', function() {
+    $.get('http://' + window.location.hostname + ':3000/start', function() {
+      hideWelcome();
+    });
   });
 
   socket.on('peon', function (peon) {
@@ -146,12 +150,21 @@ $(function() {
     });
     console.log(peons);
   });
+
   socket.on('energy', function(energy) {
     console.log('energy', energy,(energy.A / 10000));
     $('#agauge').css('width', energy.A + '%');
     $('#bgauge').css('width', energy.B + '%');
   });
 
+  socket.on('winner', function(player) {
+    $('.dark').removeClass('off');
+    $('.logo').removeClass('off');
+    $('#winner')
+      .removeClass('off')
+      .html('Joueur' + player +'<br>gagne la partie !')
+      .css('color', colors[player]);
+  });
   socket.on(clientUUID, function(data) {
 
   });
