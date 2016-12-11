@@ -186,12 +186,18 @@ router.get('/reset', (req, res, next) => {
   res.redirect('/');
 });
 
-router.get('/start/:player', (req, res, next) => {
+router.get('/start', (req, res, next) => {
+  gameStarted = true;
   res.json({
     status: true,
     A: players.A.energy,
     B: players.B.energy
   });
+});
+
+router.get('/stop', (req, res, next) => {
+  gameStarted = false;
+  res.redirect('/reset');
 });
 
 // scores
@@ -332,7 +338,7 @@ router.post('/cmd/send/:player', (req, res, next) => {
 router.post('/cmd/create/:player', (req, res, next) => {
   //{"nb":5}
   var player = players[req.params.player];
-  if (player.createPeon(req.body.nb)) {
+  if (player.createPeon(parInt(req.body.nb))) {
     res.json({
       success: true,
       total: player.peons.toCreate
