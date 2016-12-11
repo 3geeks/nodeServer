@@ -28,6 +28,9 @@ Sensor.prototype.harvest = function () {
       console.log('data', data);
       var val = data[0].dps[Object.keys(data[0].dps)[0]];
       return val * this.coef;
+    })
+    .catch(e => {
+      console.log(e);
     });
 };
 

@@ -165,6 +165,14 @@ $(function() {
       .html('Joueur' + player +'<br>gagne la partie !')
       .css('color', colors[player]);
   });
+
+  socket.on('base', function(data) {
+    zones[data.name].setStyle({
+      fillColor: colors[data.owner],
+      color: colors[data.owner]
+    });
+  });
+
   socket.on(clientUUID, function(data) {
 
   });

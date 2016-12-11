@@ -5,7 +5,7 @@ var
 function Player(name, bastion) {
   this.name = name;
   this.bastion = bastion;
-  this.energy = 99;
+  this.energy = 0;
   this.peons = {
     toCreate: 10,
     alive: {}

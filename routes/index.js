@@ -5,6 +5,7 @@ var
   fs = require('fs'),                       // use the filesystem
   _ = require('lodash'),
   utils = require('../utils'),
+  request = require('request'),
 
   businessClasses = require('../datamodels'), // all the data models
   zonesGJ = require('../public/data/zones.json'), // all the zones
@@ -27,7 +28,13 @@ var
   stackPointer = 0,                         // the pointer to the stack
   movingPeonsStack = [],                    // the moving peons stack
   io,
-  winner;
+  winner,
+  provizionOptions = {
+  url: 'http://109.202.107.147:20808/AutoFlow/TasksManager/rest/NodeJSWebHooks',
+  headers: {
+    'Accept': 'application/json'
+  }
+};
 
 /**********************************************************************************************************************
   Business objects init
@@ -154,7 +161,14 @@ mainLoop = () => {
   }
   if (winner) {
     io.emit('winner', winner.name);
-    //todo le dire à provision
+    request.post(provizionOptions).form({
+      setup_name: 'CiscoPhilipsHue',
+      fields: {
+        message: 'Le joueur ' + winner.name + ' a gagné',
+        turn: 'on',
+        color: (winner.name === 'B') ? 'red' : 'blue'
+      }
+    });
     setUp();
   }
   // empty the current stack tasks
@@ -213,7 +227,15 @@ router.get('/reset', (req, res, next) => {
 router.get('/start', (req, res, next) => {
   gameStarted = true;
 
-  // todo le dire à Provision
+  request.post(provizionOptions).form({
+    setup_name: 'CiscoPhilipsHue',
+    fields: {
+      message: 'La partie commence!',
+      turn: 'on',
+      color: 'green'
+    }
+  });
+
   res.json({
     status: true,
   });
@@ -221,7 +243,14 @@ router.get('/start', (req, res, next) => {
 
 router.get('/stop', (req, res, next) => {
   gameStarted = false;
-  // todo le dire à Provision
+  request.post(provizionOptions).form({
+    setup_name: 'CiscoPhilipsHue',
+    fields: {
+      message: 'La partie a été arrétée.',
+      turn: 'off'
+    }
+  });
+
   res.redirect('/reset');
 });
 
@@ -315,6 +344,7 @@ router.post('/cmd/send/:player', (req, res, next) => {
         movingPeonsStack[sp] = [];
       }
       movingPeonsStack[sp].push(() => {
+        var oldOwner;
         console.log('===== Sending peon...');
         // - add the peon to the base for the player
         // - remove a peon from the base for the opposite player
@@ -338,12 +368,54 @@ router.post('/cmd/send/:player', (req, res, next) => {
 
         // - compute ownership
         if (base.peons.A === 3) {
+          oldOwner = base.owner;
           base.owner = players.A;
           console.log('-------------- base', base.name,'remportée par A !!!!!!!!');
+          request.post(provizionOptions).form({
+            setup_name: 'CiscoAlerts',
+            fields: {
+              message: 'Le joueur A vient de gagner la zone "' + base.name + '" !'
+            }
+          });
+
+          res.io.emit('base', {
+            name: base.name,
+            owner: base.owner.name
+          });
+
+          if (oldOwner) {
+            request.post(provizionOptions).form({
+              setup_name: 'CiscoAlerts',
+              fields: {
+                message: 'Le joueur B vient de perdre la zone "' + base.name + '" !'
+              }
+            });
+          }
         }
         if (base.peons.B === 3) {
+          oldOwner = base.owner;
           base.owner = players.B;
           console.log('-------------- base', base.name,'remportée par',base.owner,'!!!!!!!!');
+          request.post(provizionOptions).form({
+            setup_name: 'CiscoAlerts',
+            fields: {
+              message: 'Le joueur B vient de gagner la zone "' + base.name + '" !'
+            }
+          });
+
+          res.io.emit('base', {
+            name: base.name,
+            owner: base.owner.name
+          });
+
+          if (oldOwner) {
+            request.post(provizionOptions).form({
+              setup_name: 'CiscoAlerts',
+              fields: {
+                message: 'Le joueur A vient de perdre la zone "' + base.name + '" !'
+              }
+            });
+          }
         }
 
         return true;
