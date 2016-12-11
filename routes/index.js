@@ -239,7 +239,7 @@ router.get('/start', (req, res, next) => {
   });
 });
 
-outer.get('/isstarted', (req, res, next) => {
+router.get('/isstarted', (req, res, next) => {
   res.json({
     gameStarted: gameStarted
   });
