@@ -239,7 +239,7 @@ router.get('/start', (req, res, next) => {
   io.emit('start', {});
 
   res.json({
-    status: true,
+    success: true,
   });
 });
 
@@ -267,14 +267,14 @@ router.get('/stop', (req, res, next) => {
   });
   io.emit('stop', {});
   res.json({
-    status: true
+    success: true
   });
 });
 
 // scores
 router.get('/scores', (req, res, next) => {
   res.json({
-    status: true,
+    succcess: true,
     A: players.A.energy,
     B: players.B.energy
   });
@@ -342,7 +342,7 @@ router.post('/cmd/send/:player', (req, res, next) => {
 
   if (bases[req.body.zone] === undefined) {
     res.json({
-      status: false,
+      success: false,
       message: 'La base ' + req.body.zone + ' n\'existe pas...'
     });
   }
