@@ -113,7 +113,7 @@ $(function() {
         coords[0].push(point);
       });
 
-      zones[feature.properties.name] = L.polygon(coords, {
+      zones[feature.properties.name.toLowerCase()] = L.polygon(coords, {
         //dashArray: '4,2',
         weight: 1,
         color: color,
